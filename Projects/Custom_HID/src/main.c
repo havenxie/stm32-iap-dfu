@@ -59,15 +59,15 @@ int main(void)
   RCC_APB1PeriphClockCmd(RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN , ENABLE);
 #endif
     
-    Set_System();
+  Set_System();
     
-    while(thisCnt--)
-    {
-        STM_EVAL_LEDOn(LED1);
-        Delay(500000);
-        STM_EVAL_LEDOff(LED1);
-        Delay(500000);
-    }
+  while(thisCnt--)
+  {
+      STM_EVAL_LEDOn(LED1);
+      Delay(500000);
+      STM_EVAL_LEDOff(LED1);
+      Delay(500000);
+  }
 
   USB_Interrupts_Config();
 
