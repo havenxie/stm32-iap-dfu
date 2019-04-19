@@ -64,7 +64,7 @@ const uint8_t Virtual_Com_Port_ConfigDescriptor[] =
     0x01,   /* bConfigurationValue: Configuration value */
     0x00,   /* iConfiguration: Index of string descriptor describing the configuration */
     0xC0,   /* bmAttributes: self powered */
-    0x32,   /* MaxPower 0 mA */
+    0x32,   /* MaxPower 100 mA */
     /*Interface Descriptor*/
     0x09,   /* bLength: Interface Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,  /* bDescriptorType: Interface */
@@ -107,6 +107,7 @@ const uint8_t Virtual_Com_Port_ConfigDescriptor[] =
     VIRTUAL_COM_PORT_INT_SIZE,      /* wMaxPacketSize: */
     0x00,
     0xFF,   /* bInterval: */
+    
     /*Data class interface descriptor*/
     0x09,   /* bLength: Endpoint Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,  /* bDescriptorType: */

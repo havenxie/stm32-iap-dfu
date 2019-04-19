@@ -21,6 +21,16 @@ del *.d /s
 del *.axf /s
 del *.tra /s
 del *.dep /s           
+del *.pbi /s
+del *.xcl /s
+del *.pbd /s
+del *.linf /s
+del *.browse /s
+del *.crun /s
+del *.dbgdt /s
+del *.dnx /s
+del *.ps1 /s
+del *.wsdt /s
 del JLinkLog.txt /s
 
 del *.iex /s
@@ -30,4 +40,5 @@ del *.map /s
 del *.htm /s
 del *.txt /s
 del STM3210E-EVAL /q/s
+del STM3210B-EVAL /q/s
 exit
