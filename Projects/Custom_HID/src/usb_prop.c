@@ -233,65 +233,40 @@ void CustomHID_Status_In(void)
 {  
   BitAction Led_State;
   
-  if (Report_Buf[1] == 0)
+  if(Report_Buf[0] == 0x80 && Report_Buf[1] == 0x55)
   {
-    Led_State = Bit_RESET;
-  }
-  else 
-  {
-    Led_State = Bit_SET;
-  }
+#if (USE_BKP_SAVE_FLAG == 1)
+    PWR->CR |= PWR_CR_DBP;
+    BKP_WriteBackupRegister(IAP_FLAG_ADDR, 0x5A5A);
+    PWR->CR &= ~PWR_CR_DBP;
+#endif
+     __set_FAULTMASK(1); 
+     NVIC_SystemReset();
+  }  
   
+  
+  Led_State = (Report_Buf[1] ==  Bit_SET) ? Bit_SET : Bit_RESET;
   switch (Report_Buf[0])  
   {
     /*Change LED's status according to the host report*/
-    
-  case 1: /* Led 1 */ 
-    if (Led_State != Bit_RESET)
-    {
-      STM_EVAL_LEDOn(LED1);
-    }
-    else
-    {
+    case 1: /* Led 1 */ 
+      Led_State ? STM_EVAL_LEDOn(LED1) : STM_EVAL_LEDOff(LED1);
+      break;
+    case 2: /* Led 2 */    
+      Led_State ? STM_EVAL_LEDOn(LED2) : STM_EVAL_LEDOff(LED2);
+      break;
+    case 3: /* Led 3 */    
+      Led_State ? STM_EVAL_LEDOn(LED3) : STM_EVAL_LEDOff(LED3);
+      break;
+    case 4: /* Led 4 */    
+      Led_State ? STM_EVAL_LEDOn(LED4) : STM_EVAL_LEDOff(LED4);
+      break;
+    default:
       STM_EVAL_LEDOff(LED1);
-    }
-    break;
-  case 2:   /* Led 2 */    
-    if (Led_State != Bit_RESET)
-    {
-      STM_EVAL_LEDOn(LED2);
-    }
-    else
-    {
       STM_EVAL_LEDOff(LED2);
-    }
-    break;
-  case 3:/* Led 3 */    
-    if (Led_State != Bit_RESET)
-    {
-      STM_EVAL_LEDOn(LED3);
-    }
-    else
-    {
       STM_EVAL_LEDOff(LED3);
-    }
-    break;
-  case 4:/* Led 4 */    
-    if (Led_State != Bit_RESET)
-    {
-      STM_EVAL_LEDOn(LED4);
-    }
-    else
-    {
-      STM_EVAL_LEDOff(LED4);
-    }
-    break;
-  default:
-    STM_EVAL_LEDOff(LED1);
-    STM_EVAL_LEDOff(LED2);
-    STM_EVAL_LEDOff(LED3);
-    STM_EVAL_LEDOff(LED4); 
-    break;
+      STM_EVAL_LEDOff(LED4); 
+      break;
   }
 }
 

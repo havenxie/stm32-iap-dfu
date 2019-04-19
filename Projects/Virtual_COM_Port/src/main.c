@@ -53,7 +53,7 @@ int main(void)
   Set_USBClock();
   USB_Interrupts_Config();
   USB_Init();
-  
+
   while (1)
   {
   }

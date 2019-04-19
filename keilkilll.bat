@@ -12,6 +12,9 @@ del *.plg /s
 del *.rpt /s
 del *.tmp /s
 del *.__i /s
+del *._ip /s
+del *._ia /s
+del *.i /s
 del *.crf /s
 del *.o /s
 del *.d /s
@@ -22,8 +25,9 @@ del JLinkLog.txt /s
 
 del *.iex /s
 del *.htm /s
-del *.sct /s
+#del *.sct /s
 del *.map /s
 del *.htm /s
-::rd STM3210E-EVAL /q/s
+del *.txt /s
+del STM3210E-EVAL /q/s
 exit

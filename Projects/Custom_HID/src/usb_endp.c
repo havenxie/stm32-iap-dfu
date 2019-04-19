@@ -52,72 +52,29 @@ void EP1_OUT_Callback(void)
 
   /* Read received data (2 bytes) */  
   USB_SIL_Read(EP1_OUT, Receive_Buffer);
-  
-  if (Receive_Buffer[1] == 0)
+      
+  Led_State = (Receive_Buffer[1] ==  Bit_SET) ? Bit_SET : Bit_RESET;
+  switch (Receive_Buffer[0])  
   {
-    Led_State = Bit_RESET;
-  }
-  else 
-  {
-    Led_State = Bit_SET;
-  }
- 
- 
-  switch (Receive_Buffer[0])
-  {
-    case 1: /* Led 1 */
-     if (Led_State != Bit_RESET)
-     {
-       STM_EVAL_LEDOn(LED1);
-     }
-     else
-     {
-       STM_EVAL_LEDOff(LED1);
-     }
-     break;
-    case 2: /* Led 2 */
-     if (Led_State != Bit_RESET)
-     {
-       //STM_EVAL_LEDOn(LED2);
-//#if (USE_BKP_SAVE_FLAG == 1)
-	    PWR->CR |= PWR_CR_DBP;
-	    BKP_WriteBackupRegister(IAP_FLAG_ADDR, 0x5A5A);
-	    PWR->CR &= ~PWR_CR_DBP;
-//#endif
-         __set_FAULTMASK(1); 
-         NVIC_SystemReset();	
-     }
-     else
-     {
-       STM_EVAL_LEDOff(LED2);
-     }
+    /*Change LED's status according to the host report*/
+    case 1: /* Led 1 */ 
+      Led_State ? STM_EVAL_LEDOn(LED1) : STM_EVAL_LEDOff(LED1);
       break;
-    case 3: /* Led 3 */
-     if (Led_State != Bit_RESET)
-     {
-       STM_EVAL_LEDOn(LED3);
-     }
-     else
-     {
-       STM_EVAL_LEDOff(LED3);
-     }
+    case 2: /* Led 2 */    
+      Led_State ? STM_EVAL_LEDOn(LED2) : STM_EVAL_LEDOff(LED2);
       break;
-    case 4: /* Led 4 */
-     if (Led_State != Bit_RESET)
-     {
-       STM_EVAL_LEDOn(LED4);
-     }
-     else
-     {
-       STM_EVAL_LEDOff(LED4);
-     }
+    case 3: /* Led 3 */    
+      Led_State ? STM_EVAL_LEDOn(LED3) : STM_EVAL_LEDOff(LED3);
       break;
-  default:
-    STM_EVAL_LEDOff(LED1);
-    STM_EVAL_LEDOff(LED2);
-    STM_EVAL_LEDOff(LED3);
-    STM_EVAL_LEDOff(LED4); 
-    break;
+    case 4: /* Led 4 */    
+      Led_State ? STM_EVAL_LEDOn(LED4) : STM_EVAL_LEDOff(LED4);
+      break;
+    default:
+      STM_EVAL_LEDOff(LED1);
+      STM_EVAL_LEDOff(LED2);
+      STM_EVAL_LEDOff(LED3);
+      STM_EVAL_LEDOff(LED4); 
+      break;
   }
  
   SetEPRxStatus(ENDP1, EP_RX_VALID);
