@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.uvgui.*
 
 # Object files
 *.o
@@ -55,4 +56,4 @@ dkms.conf
 .vscode/ipch/
 
 # Keil Project
-*.uvgui.*
+
