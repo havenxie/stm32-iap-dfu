@@ -212,7 +212,7 @@
             <AdsLven>1</AdsLven>
             <AdsLsxf>1</AdsLsxf>
             <RvctClst>0</RvctClst>
-            <GenPPlst>1</GenPPlst>
+            <GenPPlst>0</GenPPlst>
             <AdsCpuType>"Cortex-M3"</AdsCpuType>
             <RvctDeviceName></RvctDeviceName>
             <mOS>0</mOS>
@@ -2310,9 +2310,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -4400,9 +4400,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -6489,9 +6489,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -8782,9 +8782,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -11075,9 +11075,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -13317,9 +13317,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>
@@ -15610,9 +15610,9 @@
           <GroupName>Doc</GroupName>
           <Files>
             <File>
-              <FileName>readme.txt</FileName>
+              <FileName>readme.md</FileName>
               <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
+              <FilePath>..\readme.md</FilePath>
             </File>
           </Files>
         </Group>

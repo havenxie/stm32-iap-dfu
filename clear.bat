@@ -1,3 +1,107 @@
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Audio_Speaker\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Composite_Example\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Composite_Example\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Custom_HID\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Custom_HID\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Device_Firmware_Upgrade\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\JoyStickMouse\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Mass_Storage\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Mass_Storage\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Virtual_COM_Port\EWARM\STM32373C-EVAL
+
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32373C-EVAL
+
 del *.bak /s
 del *.ddk /s
 del *.edk /s
@@ -7,7 +111,7 @@ del *.mpf /s
 del *.mpj /s
 del *.obj /s
 del *.omf /s
-::del *.opt /s  ::²»ÔÊÐíÉ¾³ýJLINKµÄÉèÖÃ
+::del *.opt /s  ::ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½JLINKï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 del *.plg /s
 del *.rpt /s
 del *.tmp /s
@@ -35,10 +139,8 @@ del JLinkLog.txt /s
 
 del *.iex /s
 del *.htm /s
-#del *.sct /s
+::del *.sct /s
 del *.map /s
 del *.htm /s
 del *.txt /s
-del STM3210E-EVAL /q/s
-del STM3210B-EVAL /q/s
 exit
