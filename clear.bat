@@ -1,4 +1,4 @@
-rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152-EVAL
+﻿rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152D-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210B-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210E-EVAL
@@ -102,6 +102,18 @@ rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM3210E-EVAL
 rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32303C-EVAL
 rd  /s/q  .\Projects\VirtualComport_Loopback\EWARM\STM32373C-EVAL
 
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\MDK-ARM\STM32373C-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM32L152-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM32L152D-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM3210B-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM3210E-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM32303C-EVAL
+rd  /s/q  .\Projects\Composite_VCP+HID\EWARM\STM32373C-EVAL
 del *.bak /s
 del *.ddk /s
 del *.edk /s

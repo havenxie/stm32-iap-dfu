@@ -121,13 +121,13 @@ typedef enum
   * @{
   */
 #define LEDn                             4
-//#define LED1_PIN                         GPIO_Pin_6
-//#define LED1_GPIO_PORT                   GPIOC
-//#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC  
+#define LED1_PIN                         GPIO_Pin_13
+#define LED1_GPIO_PORT                   GPIOC
+#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC  
   
-#define LED1_PIN                         GPIO_Pin_9
-#define LED1_GPIO_PORT                   GPIOA
-#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOA
+//#define LED1_PIN                         GPIO_Pin_9
+//#define LED1_GPIO_PORT                   GPIOA
+//#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOA
 
 #define LED2_PIN                         GPIO_Pin_7
 #define LED2_GPIO_PORT                   GPIOC

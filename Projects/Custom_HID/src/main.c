@@ -54,10 +54,10 @@ void Delay(__IO uint32_t nCount);
 int main(void)
 {
   uint8_t thisCnt = 6; 
-  NVIC_SetVectorTable(FLASH_BASE, 0x4000);
-#if (USE_BKP_SAVE_FLAG == 1)
-  RCC_APB1PeriphClockCmd(RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN , ENABLE);
-#endif
+//  NVIC_SetVectorTable(FLASH_BASE, 0x4000);
+//#if (USE_BKP_SAVE_FLAG == 1)
+//  RCC_APB1PeriphClockCmd(RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN , ENABLE);
+//#endif
     
   Set_System();
     
