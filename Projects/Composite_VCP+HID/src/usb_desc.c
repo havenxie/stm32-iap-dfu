@@ -30,16 +30,21 @@
 #include "usb_lib.h"
 #include "usb_desc.h"
 
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* Extern variables ----------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+/* Private functions ---------------------------------------------------------*/
+
 /* USB Standard Device Descriptor */
-const uint8_t CustomHID_DeviceDescriptor[] =
+const uint8_t CustomHID_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
   {
     0x12,   /* bLength */
     USB_DEVICE_DESCRIPTOR_TYPE,     /* bDescriptorType */
     0x00,
     0x02,   /* bcdUSB = 2.00 */
-    //0x02,   /* bDeviceClass: CDC */
-    //0x00,   /* bDeviceSubClass */
-    //0x00,   /* bDeviceProtocol */
     0xEF,
     0x02,
     0x01,
@@ -47,7 +52,7 @@ const uint8_t CustomHID_DeviceDescriptor[] =
     0x83,
     0x04,   /* idVendor = 0x0483 */
     0x40,
-    0x57,   /* idProduct = 0x7540 */
+    0x57,   /* idProduct = 0x5740 */
     0x00,
     0x02,   /* bcdDevice = 2.00 */
     1,              /* Index of string descriptor describing manufacturer */
@@ -56,13 +61,13 @@ const uint8_t CustomHID_DeviceDescriptor[] =
     0x01    /* bNumConfigurations */
   };
 
+  /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
 const uint8_t CustomHID_ConfigDescriptor[] =
   {
-
     /*Configuration Descriptor*/
     0x09,   /* bLength: Configuration Descriptor size */
     USB_CONFIGURATION_DESCRIPTOR_TYPE,      /* bDescriptorType: Configuration */
-    VIRTUAL_COM_PORT_SIZ_CONFIG_DESC,       /* wTotalLength:no of returned bytes */
+    CUSTOMHID_SIZ_CONFIG_DESC,       /* wTotalLength:no of returned bytes */
     0x00,
     0x03,   /* bNumInterfaces: 2 interface */
     0x01,   /* bConfigurationValue: Configuration value */
@@ -71,14 +76,14 @@ const uint8_t CustomHID_ConfigDescriptor[] =
     0x32,   /* MaxPower 100 mA */
 	  
     /* Interface Association Descriptor(IAD Descriptor)  */ 
-	0x08,      /*   bLength  */
-	0x0B,      /*   bDescriptorType*/
-	0x00,      /*    bFirstInterface*/
-	0x02,      /*     bInterfaceCount*/
-	0x02,      /*     bFunctionClass --CDC*/
-	0x02,       /*     bFunctionSubClass*/
-	0x01,       /*    bFunctionProtocoll*/
-	0x00,       /*   iFunction */
+	0x08,   /*   bLength  */
+	0x0B,   /*   bDescriptorType*/
+	0x00,   /*    bFirstInterface*/
+	0x02,   /*     bInterfaceCount*/
+	0x02,   /*     bFunctionClass --CDC*/
+	0x02,   /*     bFunctionSubClass*/
+	0x01,   /*    bFunctionProtocoll*/
+	0x00,   /*   iFunction */
 
     /*Interface Descriptor*/
     0x09,   /* bLength: Interface Descriptor size */
@@ -150,16 +155,15 @@ const uint8_t CustomHID_ConfigDescriptor[] =
     0x00,
     0x00,    /* bInterval */
 	
-	
-/*********************************IAD Descriptor*********************************/
-    0x08,                   //?????
-    0x0B,               //IAD?????
-    0x02,                   //bFirstInterface
-    0x01,                   //bInferfaceCount
-    0x03,                   //bFunctionClass:HID
-    0x00,                   //bFunctionSubClass
-    0x00,                   //bFunctionProtocol
-    0x05,                   //iFunction
+    /*********************************IAD Descriptor*********************************/
+    0x08,    //?????
+    0x0B,    //IAD?????
+    0x02,    //bFirstInterface
+    0x01,    //bInferfaceCount
+    0x03,    //bFunctionClass:HID
+    0x00,    //bFunctionSubClass
+    0x00,    //bFunctionProtocol
+    0x05,    //iFunction
 	
     /************** Descriptor of Custom HID interface ****************/
     /* 09 */
@@ -347,17 +351,17 @@ const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
   };
 
 /* USB String Descriptors */
-const uint8_t CustomHID_StringLangID[VIRTUAL_COM_PORT_SIZ_STRING_LANGID] =
+const uint8_t CustomHID_StringLangID[CUSTOMHID_SIZ_STRING_LANGID] =
   {
-    VIRTUAL_COM_PORT_SIZ_STRING_LANGID,
+    CUSTOMHID_SIZ_STRING_LANGID,
     USB_STRING_DESCRIPTOR_TYPE,
     0x09,
     0x04 /* LangID = 0x0409: U.S. English */
   };
 
-const uint8_t CustomHID_StringVendor[VIRTUAL_COM_PORT_SIZ_STRING_VENDOR] =
+const uint8_t CustomHID_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
   {
-    VIRTUAL_COM_PORT_SIZ_STRING_VENDOR,     /* Size of Vendor string */
+    CUSTOMHID_SIZ_STRING_VENDOR,     /* Size of Vendor string */
     USB_STRING_DESCRIPTOR_TYPE,             /* bDescriptorType*/
     /* Manufacturer: "STMicroelectronics" */
     'S', 0, 'T', 0, 'M', 0, 'i', 0, 'c', 0, 'r', 0, 'o', 0, 'e', 0,
@@ -365,9 +369,9 @@ const uint8_t CustomHID_StringVendor[VIRTUAL_COM_PORT_SIZ_STRING_VENDOR] =
     'c', 0, 's', 0
   };
 
-const uint8_t CustomHID_StringProduct[VIRTUAL_COM_PORT_SIZ_STRING_PRODUCT] =
+const uint8_t CustomHID_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
   {
-    VIRTUAL_COM_PORT_SIZ_STRING_PRODUCT,          /* bLength */
+    CUSTOMHID_SIZ_STRING_PRODUCT,          /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
     /* Product name: "STM32 Virtual COM Port" */
     'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0, ' ', 0, 'V', 0, 'i', 0,
@@ -375,9 +379,9 @@ const uint8_t CustomHID_StringProduct[VIRTUAL_COM_PORT_SIZ_STRING_PRODUCT] =
     'M', 0, ' ', 0, 'P', 0, 'o', 0, 'r', 0, 't', 0, ' ', 0, ' ', 0
   };
 
-uint8_t CustomHID_StringSerial[VIRTUAL_COM_PORT_SIZ_STRING_SERIAL] =
+uint8_t CustomHID_StringSerial[CUSTOMHID_SIZ_STRING_SERIAL] =
   {
-    VIRTUAL_COM_PORT_SIZ_STRING_SERIAL,           /* bLength */
+    CUSTOMHID_SIZ_STRING_SERIAL,           /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,                   /* bDescriptorType */
     'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0
   };

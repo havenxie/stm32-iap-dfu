@@ -27,14 +27,12 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-
-#include "stm32_it.h"
-#include "usb_lib.h"
-#include "usb_prop.h"
-#include "usb_desc.h"
 #include "hw_config.h"
+#include "usb_lib.h"
+#include "usb_desc.h"
 #include "usb_pwr.h"
-
+#include "usb_prop.h"
+#include "stm32_it.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -70,10 +68,6 @@ extern LINE_CODING linecoding;
 *******************************************************************************/
 void Set_System(void)
 {
-#if !defined(STM32L1XX_MD) && !defined(STM32L1XX_HD) && !defined(STM32L1XX_MD_PLUS)
-  GPIO_InitTypeDef GPIO_InitStructure;
-#endif /* STM32L1XX_MD && STM32L1XX_XD */  
-
 #if defined(USB_USE_EXTERNAL_PULLUP)
   GPIO_InitTypeDef  GPIO_InitStructure;
 #endif /* USB_USE_EXTERNAL_PULLUP */ 
@@ -93,11 +87,17 @@ void Set_System(void)
   /* Enable USB_DISCONNECT GPIO clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_DISCONNECT, ENABLE);
 
-  /* Configure USB pull-up pin */
-  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
+  /* ADCCLK = PCLK2/8 */
+  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
+  
+  /* Configure the used GPIOs*/
+  GPIO_Configuration();
+  
+//  /* Configure USB pull-up pin */
+//  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
+//  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+//  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
 #endif /* STM32L1XX_MD && STM32L1XX_XD */
    
 #if defined(USB_USE_EXTERNAL_PULLUP)
@@ -255,15 +255,31 @@ void USB_Interrupts_Config(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
   
-    /* Enable the USB Wake-up interrupt */
+  /* Enable the USB Wake-up interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = USBWakeUp_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 #endif /* STM32L1XX_XD */
 
   /* Enable USART Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM1_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_Init(&NVIC_InitStructure);
+  
+  /* Enable the EXTI9_5 Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_Init(&NVIC_InitStructure);
+  
+  /* Enable the EXTI15_10 Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+  NVIC_Init(&NVIC_InitStructure);
+  
+  /* Enable the DMA1 Channel1 Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = DMA1_Channel1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
   NVIC_Init(&NVIC_InitStructure);
 }
 
@@ -295,6 +311,193 @@ void USB_Cable_Config (FunctionalState NewState)
     GPIO_SetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);
   }
 #endif /* STM32L1XX_MD */
+}
+
+/*******************************************************************************
+* Function Name  : GPIO_Configuration
+* Description    : Configures the different GPIO ports.
+* Input          : None
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void GPIO_Configuration(void)
+{
+  GPIO_InitTypeDef GPIO_InitStructure;
+  
+#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS) || defined (STM32F37X) || defined (STM32F30X)
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIO_DISCONNECT | 
+                        RCC_AHBPeriph_GPIO_IOAIN , ENABLE); 
+#else  
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_DISCONNECT | 
+                         RCC_APB2Periph_GPIO_IOAIN , ENABLE);  
+  
+  /* USB_DISCONNECT used as USB pull-up */
+  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
+#endif /* STM32L1XX_XD */ 
+  
+  /* Configure Potentiometer IO as analog input */
+  GPIO_InitStructure.GPIO_Pin = GPIO_IOAIN_PIN;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+  GPIO_Init(GPIO_IOAIN, &GPIO_InitStructure);
+}
+
+/*******************************************************************************
+* Function Name : ADC_Configuration.
+* Description   : Configure the ADC and DMA.
+* Input         : None.
+* Output        : None.
+* Return value  : The direction value.
+*******************************************************************************/
+void ADC_Configuration(void)
+{
+  ADC_InitTypeDef       ADC_InitStructure;
+  DMA_InitTypeDef DMA_InitStructure;
+  /* Enable DMA1 clock */
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+  
+  /* Enable ADC1 clock */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+  
+  /* DMA1 channel1 configuration ---------------------------------------------*/
+  DMA_DeInit(DMA1_Channel1);
+  DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
+  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC_ConvertedValueX;
+  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+  DMA_InitStructure.DMA_BufferSize = 1;
+  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
+  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+  DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+  DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+  
+  /* Enable DMA1 channel1 */
+  DMA_Cmd(DMA1_Channel1, ENABLE);
+  
+  /* Enable the DMA1 Channel1 Transfer complete interrupt */
+  DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
+  
+#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)
+  /* Enable the HSI for the ADC operations */
+  RCC_HSICmd(ENABLE);
+  
+  /* ADC1 configuration ------------------------------------------------------*/
+  ADC_StructInit(&ADC_InitStructure);
+  ADC_InitStructure.ADC_ScanConvMode = ENABLE;
+  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+  ADC_InitStructure.ADC_NbrOfConversion = 1;
+  ADC_Init(ADC1, &ADC_InitStructure);
+  
+#if defined (USE_STM32L152D_EVAL)
+  /* ADC1 regular channel31 configuration */ 
+  ADC_RegularChannelConfig(ADC1, ADC_Channel_31, 1, ADC_SampleTime_384Cycles);
+  
+#else
+  /* ADC1 regular channel18 configuration */ 
+  ADC_RegularChannelConfig(ADC1, ADC_Channel_18, 1, ADC_SampleTime_384Cycles);
+#endif
+  
+#if !defined (USE_STM32373C_EVAL)
+  /* Enable the request after last transfer for DMA Circular mode */
+  ADC_DMARequestAfterLastTransferCmd(ADC1, ENABLE);
+#endif
+  /* Enable ADC1 DMA */
+  ADC_DMACmd(ADC1, ENABLE);
+  
+  /* Enable ADC1 */
+  ADC_Cmd(ADC1, ENABLE);
+  
+#else
+  /* ADC1 configuration ------------------------------------------------------*/
+#if !defined (USE_STM32373C_EVAL)
+  ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+#endif
+  
+  ADC_InitStructure.ADC_ScanConvMode = ENABLE;
+  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+  ADC_InitStructure.ADC_NbrOfChannel = 1;
+  ADC_Init(ADC1, &ADC_InitStructure);
+  
+  /* ADC1 regular channel configuration */ 
+  ADC_RegularChannelConfig(ADC1, ADC_AIN_CHANNEL, 1, ADC_SampleTime_55Cycles5);
+  
+  /* Enable ADC1 DMA */
+  ADC_DMACmd(ADC1, ENABLE);
+  
+  /* Enable ADC1 */
+  ADC_Cmd(ADC1, ENABLE);
+  
+  /* Enable ADC1 reset calibration register */   
+  ADC_ResetCalibration(ADC1);
+  /* Check the end of ADC1 reset calibration register */
+  while(ADC_GetResetCalibrationStatus(ADC1));
+  /* Start ADC1 calibration */
+  ADC_StartCalibration(ADC1);
+  
+  /* Check the end of ADC1 calibration */
+  while(ADC_GetCalibrationStatus(ADC1));  
+  
+#endif /* STM32L1XX_XD */ 
+}
+
+/*******************************************************************************
+* Function Name  : Get_SerialNum.
+* Description    : Create the serial number string descriptor.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void Get_SerialNum(void)
+{
+  uint32_t Device_Serial0, Device_Serial1, Device_Serial2;
+
+  Device_Serial0 = *(uint32_t*)ID1;
+  Device_Serial1 = *(uint32_t*)ID2;
+  Device_Serial2 = *(uint32_t*)ID3;  
+
+  Device_Serial0 += Device_Serial2;
+
+  if (Device_Serial0 != 0)
+  {
+    IntToUnicode (Device_Serial0, &CustomHID_StringSerial[2] , 8);
+    IntToUnicode (Device_Serial1, &CustomHID_StringSerial[18], 4);
+  }
+}
+
+/*******************************************************************************
+* Function Name  : HexToChar.
+* Description    : Convert Hex 32Bits value into char.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len)
+{
+  uint8_t idx = 0;
+  
+  for( idx = 0 ; idx < len ; idx ++)
+  {
+    if( ((value >> 28)) < 0xA )
+    {
+      pbuf[ 2* idx] = (value >> 28) + '0';
+    }
+    else
+    {
+      pbuf[2* idx] = (value >> 28) + 'A' - 10; 
+    }
+    
+    value = value << 4;
+    
+    pbuf[ 2* idx + 1] = 0;
+  }
 }
 
 /*******************************************************************************
@@ -515,160 +718,6 @@ void USART_To_USB_Send_Data(void)
   }
 }
 
-/*******************************************************************************
-* Function Name : ADC_Configuration.
-* Description   : Configure the ADC and DMA.
-* Input         : None.
-* Output        : None.
-* Return value  : The direction value.
-*******************************************************************************/
-void ADC_Configuration(void)
-{
-  ADC_InitTypeDef       ADC_InitStructure;
-  DMA_InitTypeDef DMA_InitStructure;
-  /* Enable DMA1 clock */
-  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-  
-  /* Enable ADC1 clock */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
-  
-  /* DMA1 channel1 configuration ---------------------------------------------*/
-  DMA_DeInit(DMA1_Channel1);
-  DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC_ConvertedValueX;
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-  DMA_InitStructure.DMA_BufferSize = 1;
-  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
-  DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-  DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-  
-  /* Enable DMA1 channel1 */
-  DMA_Cmd(DMA1_Channel1, ENABLE);
-  
-  /* Enable the DMA1 Channel1 Transfer complete interrupt */
-  DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
-  
-#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)
-  /* Enable the HSI for the ADC operations */
-  RCC_HSICmd(ENABLE);
-  
-  /* ADC1 configuration ------------------------------------------------------*/
-  ADC_StructInit(&ADC_InitStructure);
-  ADC_InitStructure.ADC_ScanConvMode = ENABLE;
-  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_NbrOfConversion = 1;
-  ADC_Init(ADC1, &ADC_InitStructure);
-  
-#if defined (USE_STM32L152D_EVAL)
-  /* ADC1 regular channel31 configuration */ 
-  ADC_RegularChannelConfig(ADC1, ADC_Channel_31, 1, ADC_SampleTime_384Cycles);
-  
-#else
-  /* ADC1 regular channel18 configuration */ 
-  ADC_RegularChannelConfig(ADC1, ADC_Channel_18, 1, ADC_SampleTime_384Cycles);
-#endif
-  
-#if !defined (USE_STM32373C_EVAL)
-  /* Enable the request after last transfer for DMA Circular mode */
-  ADC_DMARequestAfterLastTransferCmd(ADC1, ENABLE);
-#endif
-  /* Enable ADC1 DMA */
-  ADC_DMACmd(ADC1, ENABLE);
-  
-  /* Enable ADC1 */
-  ADC_Cmd(ADC1, ENABLE);
-  
-#else
-  /* ADC1 configuration ------------------------------------------------------*/
-#if !defined (USE_STM32373C_EVAL)
-  ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-#endif
-  
-  ADC_InitStructure.ADC_ScanConvMode = ENABLE;
-  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_NbrOfChannel = 1;
-  ADC_Init(ADC1, &ADC_InitStructure);
-  
-  /* ADC1 regular channel configuration */ 
-  ADC_RegularChannelConfig(ADC1, ADC_AIN_CHANNEL, 1, ADC_SampleTime_55Cycles5);
-  
-  /* Enable ADC1 DMA */
-  ADC_DMACmd(ADC1, ENABLE);
-  
-  /* Enable ADC1 */
-  ADC_Cmd(ADC1, ENABLE);
-  
-  /* Enable ADC1 reset calibration register */   
-  ADC_ResetCalibration(ADC1);
-  /* Check the end of ADC1 reset calibration register */
-  while(ADC_GetResetCalibrationStatus(ADC1));
-  /* Start ADC1 calibration */
-  ADC_StartCalibration(ADC1);
-  
-  /* Check the end of ADC1 calibration */
-  while(ADC_GetCalibrationStatus(ADC1));  
-  
-#endif /* STM32L1XX_XD */ 
-}
 
-/*******************************************************************************
-* Function Name  : Get_SerialNum.
-* Description    : Create the serial number string descriptor.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-void Get_SerialNum(void)
-{
-  uint32_t Device_Serial0, Device_Serial1, Device_Serial2;
-
-  Device_Serial0 = *(uint32_t*)ID1;
-  Device_Serial1 = *(uint32_t*)ID2;
-  Device_Serial2 = *(uint32_t*)ID3;  
-
-  Device_Serial0 += Device_Serial2;
-
-  if (Device_Serial0 != 0)
-  {
-    IntToUnicode (Device_Serial0, &CustomHID_StringSerial[2] , 8);
-    IntToUnicode (Device_Serial1, &CustomHID_StringSerial[18], 4);
-  }
-}
-
-/*******************************************************************************
-* Function Name  : HexToChar.
-* Description    : Convert Hex 32Bits value into char.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len)
-{
-  uint8_t idx = 0;
-  
-  for( idx = 0 ; idx < len ; idx ++)
-  {
-    if( ((value >> 28)) < 0xA )
-    {
-      pbuf[ 2* idx] = (value >> 28) + '0';
-    }
-    else
-    {
-      pbuf[2* idx] = (value >> 28) + 'A' - 10; 
-    }
-    
-    value = value << 4;
-    
-    pbuf[ 2* idx + 1] = 0;
-  }
-}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

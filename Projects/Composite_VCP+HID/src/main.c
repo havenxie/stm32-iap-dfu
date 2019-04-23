@@ -32,6 +32,7 @@
 #include "usb_desc.h"
 #include "usb_pwr.h"
 
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -40,7 +41,43 @@
 __IO uint8_t PrevXferComplete = 1;
 __IO uint32_t TimingDelay = 0;
 /* Private function prototypes -----------------------------------------------*/
-/* Private functions -----------------------------·----------------------------*/
+/* Private functions ---------------------------------------------------------*/
+void Delay(__IO uint32_t nCount);
+
+/*******************************************************************************
+* Function Name  : main.
+* Description    : Main routine.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+int main(void)
+{
+  uint8_t thisCnt = 6; 
+//  NVIC_SetVectorTable(FLASH_BASE, 0x4000);
+//#if (USE_BKP_SAVE_FLAG == 1)
+//  RCC_APB1PeriphClockCmd(RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN , ENABLE);
+//#endif
+	
+  Set_System();
+	
+  while(thisCnt--)
+  {
+      STM_EVAL_LEDOn(LED1);
+      Delay(500000);
+      STM_EVAL_LEDOff(LED1);
+      Delay(500000);
+  }
+  
+  USB_Interrupts_Config();
+  Set_USBClock();
+  USB_Init();
+
+  while (1)
+  {
+  }
+}
+
 /*******************************************************************************
 * Function Name  : Delay
 * Description    : Inserts a delay time.
@@ -53,34 +90,7 @@ void Delay(__IO uint32_t nCount)
   TimingDelay = nCount;
   for(; nCount!= 0;nCount--);
 }
-/*******************************************************************************
-* Function Name  : main.
-* Description    : Main routine.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-int main(void)
-{
-  uint8_t thisCnt = 6; 
-  Set_System();
-	
-  while(thisCnt--)
-  {
-      STM_EVAL_LEDOn(LED1);
-      Delay(500000);
-      STM_EVAL_LEDOff(LED1);
-      Delay(500000);
-  }
-  
-  Set_USBClock();
-  USB_Interrupts_Config();
-  USB_Init();
 
-  while (1)
-  {
-  }
-}
 #ifdef USE_FULL_ASSERT
 /*******************************************************************************
 * Function Name  : assert_failed

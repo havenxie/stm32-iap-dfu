@@ -70,9 +70,7 @@ int main(void)
   }
 
   USB_Interrupts_Config();
-
   Set_USBClock();
-
   USB_Init();
 
   while (1)

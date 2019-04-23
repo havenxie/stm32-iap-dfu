@@ -62,14 +62,12 @@ const uint8_t CustomHID_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
     3,                          /*Index of string descriptor describing the
                                              device serial number */
     0x01                        /*bNumConfigurations*/
-  }
-  ; /* CustomHID_DeviceDescriptor */
-
-
-/* USB Configuration Descriptor */
+  };
+   
 /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
 const uint8_t CustomHID_ConfigDescriptor[CUSTOMHID_SIZ_CONFIG_DESC] =
   {
+	/* CustomHID_DeviceDescriptor */
     0x09, /* bLength: Configuration Descriptor size */
     USB_CONFIGURATION_DESCRIPTOR_TYPE, /* bDescriptorType: Configuration */
     CUSTOMHID_SIZ_CONFIG_DESC,
@@ -77,8 +75,7 @@ const uint8_t CustomHID_ConfigDescriptor[CUSTOMHID_SIZ_CONFIG_DESC] =
     0x00,
     0x01,         /* bNumInterfaces: 1 interface */
     0x01,         /* bConfigurationValue: Configuration value */
-    0x00,         /* iConfiguration: Index of string descriptor describing
-                                 the configuration*/
+    0x00,         /* iConfiguration: Index of string descriptor describing the configuration*/
     0xC0,         /* bmAttributes: Self powered */
     0x32,         /* MaxPower 100 mA: this current is used for detecting Vbus */
 
@@ -124,10 +121,11 @@ const uint8_t CustomHID_ConfigDescriptor[CUSTOMHID_SIZ_CONFIG_DESC] =
     0x03,	/* bmAttributes: Interrupt endpoint */
     0x02,	/* wMaxPacketSize: 2 Bytes max  */
     0x00,
-    0x20,	/* bInterval: Polling Interval (32 ms) */
+    0x20	/* bInterval: Polling Interval (32 ms) */
     /* 41 */
-  }
-  ; /* CustomHID_ConfigDescriptor */
+  };
+  
+   /* CustomHID_ConfigDescriptor */
 const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
   { 
 	  //for usb dfu

@@ -347,66 +347,6 @@ void GPIO_Configuration(void)
   GPIO_Init(GPIO_IOAIN, &GPIO_InitStructure);
 }
 
-/*******************************************************************************
-* Function Name : EXTI_Configuration.
-* Description   : Configure the EXTI lines for Key and Tamper push buttons.
-* Input         : None.
-* Output        : None.
-* Return value  : The direction value.
-*******************************************************************************/
-void EXTI_Configuration(void)
-{
-  EXTI_InitTypeDef EXTI_InitStructure;
-  
-#if defined (USE_STM32L152_EVAL)
-  /* Configure RIGHT EXTI line to generate an interrupt on rising & falling edges */  
-  EXTI_InitStructure.EXTI_Line = RIGHT_BUTTON_EXTI_LINE;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-  
-  /* Clear the RIGHT EXTI line pending bit */
-  EXTI_ClearITPendingBit(RIGHT_BUTTON_EXTI_LINE);
-  
-  /* Configure LEFT EXTI Line to generate an interrupt rising & falling edges */  
-  EXTI_InitStructure.EXTI_Line = LEFT_BUTTON_EXTI_LINE;
-  EXTI_Init(&EXTI_InitStructure);
-  
-  /* Clear the LEFT EXTI line pending bit */
-  EXTI_ClearITPendingBit(LEFT_BUTTON_EXTI_LINE);
-  
-#else    
-  /* Configure Key EXTI line to generate an interrupt on rising & falling edges */  
-  EXTI_InitStructure.EXTI_Line = KEY_BUTTON_EXTI_LINE;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-  
-  /* Clear the Key EXTI line pending bit */
-  EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
-  
-  /* Configure Tamper EXTI Line to generate an interrupt rising & falling edges */  
-#if !defined (USE_STM32L152D_EVAL) && !defined (STM32F30X)
-  EXTI_InitStructure.EXTI_Line = TAMPER_BUTTON_EXTI_LINE;
-  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-  
-  /* Clear the Tamper EXTI line pending bit */
-  EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
-#endif 
-#endif /* USE_STM32L152_EVAL */  
-  
-  /* Configure the EXTI line 18 connected internally to the USB IP */
-  EXTI_ClearITPendingBit(EXTI_Line18);
-  EXTI_InitStructure.EXTI_Line = EXTI_Line18; 
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-}
 #if !defined (STM32F30X)
 /*******************************************************************************
 * Function Name : ADC_Configuration.
@@ -562,6 +502,67 @@ static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len)
     
     pbuf[ 2* idx + 1] = 0;
   }
+}
+
+/*******************************************************************************
+* Function Name : EXTI_Configuration.
+* Description   : Configure the EXTI lines for Key and Tamper push buttons.
+* Input         : None.
+* Output        : None.
+* Return value  : The direction value.
+*******************************************************************************/
+void EXTI_Configuration(void)
+{
+  EXTI_InitTypeDef EXTI_InitStructure;
+  
+#if defined (USE_STM32L152_EVAL)
+  /* Configure RIGHT EXTI line to generate an interrupt on rising & falling edges */  
+  EXTI_InitStructure.EXTI_Line = RIGHT_BUTTON_EXTI_LINE;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+  
+  /* Clear the RIGHT EXTI line pending bit */
+  EXTI_ClearITPendingBit(RIGHT_BUTTON_EXTI_LINE);
+  
+  /* Configure LEFT EXTI Line to generate an interrupt rising & falling edges */  
+  EXTI_InitStructure.EXTI_Line = LEFT_BUTTON_EXTI_LINE;
+  EXTI_Init(&EXTI_InitStructure);
+  
+  /* Clear the LEFT EXTI line pending bit */
+  EXTI_ClearITPendingBit(LEFT_BUTTON_EXTI_LINE);
+  
+#else    
+  /* Configure Key EXTI line to generate an interrupt on rising & falling edges */  
+  EXTI_InitStructure.EXTI_Line = KEY_BUTTON_EXTI_LINE;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+  
+  /* Clear the Key EXTI line pending bit */
+  EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
+  
+  /* Configure Tamper EXTI Line to generate an interrupt rising & falling edges */  
+#if !defined (USE_STM32L152D_EVAL) && !defined (STM32F30X)
+  EXTI_InitStructure.EXTI_Line = TAMPER_BUTTON_EXTI_LINE;
+  EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+  
+  /* Clear the Tamper EXTI line pending bit */
+  EXTI_ClearITPendingBit(TAMPER_BUTTON_EXTI_LINE);
+#endif 
+#endif /* USE_STM32L152_EVAL */  
+  
+  /* Configure the EXTI line 18 connected internally to the USB IP */
+  EXTI_ClearITPendingBit(EXTI_Line18);
+  EXTI_InitStructure.EXTI_Line = EXTI_Line18; 
+  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
 }
 
 /*******************************************************************************

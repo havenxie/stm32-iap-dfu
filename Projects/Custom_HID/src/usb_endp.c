@@ -39,6 +39,7 @@ uint8_t Receive_Buffer[2];
 extern __IO uint8_t PrevXferComplete;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
 /*******************************************************************************
 * Function Name  : EP1_OUT_Callback.
 * Description    : EP1 OUT Callback Routine.

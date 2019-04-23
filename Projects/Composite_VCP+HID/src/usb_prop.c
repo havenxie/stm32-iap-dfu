@@ -27,12 +27,14 @@
 
 
 /* Includes ------------------------------------------------------------------*/
+
+#include "hw_config.h"
 #include "usb_lib.h"
 #include "usb_conf.h"
 #include "usb_prop.h"
 #include "usb_desc.h"
 #include "usb_pwr.h"
-#include "hw_config.h"
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -92,13 +94,13 @@ USER_STANDARD_REQUESTS User_Standard_Requests =
 ONE_DESCRIPTOR Device_Descriptor =
   {
     (uint8_t*)CustomHID_DeviceDescriptor,
-    VIRTUAL_COM_PORT_SIZ_DEVICE_DESC
+    CUSTOMHID_SIZ_DEVICE_DESC
   };
 
 ONE_DESCRIPTOR Config_Descriptor =
   {
     (uint8_t*)CustomHID_ConfigDescriptor,
-    VIRTUAL_COM_PORT_SIZ_CONFIG_DESC
+    CUSTOMHID_SIZ_CONFIG_DESC
   };
   
 ONE_DESCRIPTOR CustomHID_Report_Descriptor =
@@ -115,10 +117,10 @@ ONE_DESCRIPTOR CustomHID_Hid_Descriptor =
   
 ONE_DESCRIPTOR String_Descriptor[4] =
   {
-    {(uint8_t*)CustomHID_StringLangID, VIRTUAL_COM_PORT_SIZ_STRING_LANGID},
-    {(uint8_t*)CustomHID_StringVendor, VIRTUAL_COM_PORT_SIZ_STRING_VENDOR},
-    {(uint8_t*)CustomHID_StringProduct, VIRTUAL_COM_PORT_SIZ_STRING_PRODUCT},
-    {(uint8_t*)CustomHID_StringSerial, VIRTUAL_COM_PORT_SIZ_STRING_SERIAL}
+    {(uint8_t*)CustomHID_StringLangID, CUSTOMHID_SIZ_STRING_LANGID},
+    {(uint8_t*)CustomHID_StringVendor, CUSTOMHID_SIZ_STRING_VENDOR},
+    {(uint8_t*)CustomHID_StringProduct, CUSTOMHID_SIZ_STRING_PRODUCT},
+    {(uint8_t*)CustomHID_StringSerial, CUSTOMHID_SIZ_STRING_SERIAL}
   };
 
 /* Extern variables ----------------------------------------------------------*/

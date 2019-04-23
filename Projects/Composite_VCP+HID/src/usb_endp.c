@@ -27,11 +27,11 @@
 
 
 /* Includes ------------------------------------------------------------------*/
+#include "hw_config.h"
 #include "usb_lib.h"
+#include "usb_istr.h"
 #include "usb_desc.h"
 #include "usb_mem.h"
-#include "hw_config.h"
-#include "usb_istr.h"
 #include "usb_pwr.h"
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,7 +54,84 @@ extern __IO uint8_t PrevXferComplete;
 /* Private functions ---------------------------------------------------------*/
 
 /*******************************************************************************
-* Function Name  : EP1_IN_Callback
+* Function Name  : EP1_OUT_Callback.
+* Description    : EP1 OUT Callback Routine.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void EP1_OUT_Callback(void)
+{
+  BitAction Led_State;
+
+  /* Read received data (2 bytes) */  
+  USB_SIL_Read(EP1_OUT, Receive_Buffer);
+      
+  Led_State = (Receive_Buffer[1] ==  Bit_SET) ? Bit_SET : Bit_RESET;
+  switch (Receive_Buffer[0])  
+  {
+    /*Change LED's status according to the host report*/
+    case 1: /* Led 1 */ 
+      Led_State ? STM_EVAL_LEDOn(LED1) : STM_EVAL_LEDOff(LED1);
+      break;
+    case 2: /* Led 2 */    
+      Led_State ? STM_EVAL_LEDOn(LED2) : STM_EVAL_LEDOff(LED2);
+      break;
+    case 3: /* Led 3 */    
+      Led_State ? STM_EVAL_LEDOn(LED3) : STM_EVAL_LEDOff(LED3);
+      break;
+    case 4: /* Led 4 */    
+      Led_State ? STM_EVAL_LEDOn(LED4) : STM_EVAL_LEDOff(LED4);
+      break;
+    default:
+      STM_EVAL_LEDOff(LED1);
+      STM_EVAL_LEDOff(LED2);
+      STM_EVAL_LEDOff(LED3);
+      STM_EVAL_LEDOff(LED4); 
+      break;
+  }
+ 
+  SetEPRxStatus(ENDP1, EP_RX_VALID);
+
+}
+
+/*******************************************************************************
+* Function Name  : EP1_IN_Callback.
+* Description    : EP1 IN Callback Routine.
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void EP1_IN_Callback(void)
+{
+  PrevXferComplete = 1;
+}
+
+/*******************************************************************************
+* Function Name  : EP3_OUT_Callback
+* Description    :
+* Input          : None.
+* Output         : None.
+* Return         : None.
+*******************************************************************************/
+void EP3_OUT_Callback(void)
+{
+  uint16_t USB_Rx_Cnt;
+  
+  /* Get the received data buffer and update the counter */
+  USB_Rx_Cnt = USB_SIL_Read(EP3_OUT, USB_Rx_Buffer);
+  
+  /* USB data will be immediately processed, this allow next USB traffic being 
+  NAKed till the end of the USART Xfer */
+  
+  USB_To_USART_Send_Data(USB_Rx_Buffer, USB_Rx_Cnt);
+ 
+  /* Enable the receive of data on EP3 */
+  SetEPRxValid(ENDP3);
+}
+
+/*******************************************************************************
+* Function Name  : EP4_IN_Callback
 * Description    :
 * Input          : None.
 * Output         : None.
@@ -96,30 +173,6 @@ void EP4_IN_Callback (void)
 }
 
 /*******************************************************************************
-* Function Name  : EP3_OUT_Callback
-* Description    :
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-void EP3_OUT_Callback(void)
-{
-  uint16_t USB_Rx_Cnt;
-  
-  /* Get the received data buffer and update the counter */
-  USB_Rx_Cnt = USB_SIL_Read(EP3_OUT, USB_Rx_Buffer);
-  
-  /* USB data will be immediately processed, this allow next USB traffic being 
-  NAKed till the end of the USART Xfer */
-  
-  USB_To_USART_Send_Data(USB_Rx_Buffer, USB_Rx_Cnt);
- 
-  /* Enable the receive of data on EP3 */
-  SetEPRxValid(ENDP3);
-}
-
-
-/*******************************************************************************
 * Function Name  : SOF_Callback / INTR_SOFINTR_Callback
 * Description    :
 * Input          : None.
@@ -141,60 +194,6 @@ void SOF_Callback(void)
       Handle_USBAsynchXfer();
     }
   }  
-}
-
-/*******************************************************************************
-* Function Name  : EP1_OUT_Callback.
-* Description    : EP1 OUT Callback Routine.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-void EP1_OUT_Callback(void)
-{
-  BitAction Led_State;
-
-  /* Read received data (2 bytes) */  
-  USB_SIL_Read(EP1_OUT, Receive_Buffer);
-      
-  Led_State = (Receive_Buffer[1] ==  Bit_SET) ? Bit_SET : Bit_RESET;
-  switch (Receive_Buffer[0])  
-  {
-    /*Change LED's status according to the host report*/
-    case 1: /* Led 1 */ 
-      Led_State ? STM_EVAL_LEDOn(LED1) : STM_EVAL_LEDOff(LED1);
-      break;
-    case 2: /* Led 2 */    
-      Led_State ? STM_EVAL_LEDOn(LED2) : STM_EVAL_LEDOff(LED2);
-      break;
-    case 3: /* Led 3 */    
-      Led_State ? STM_EVAL_LEDOn(LED3) : STM_EVAL_LEDOff(LED3);
-      break;
-    case 4: /* Led 4 */    
-      Led_State ? STM_EVAL_LEDOn(LED4) : STM_EVAL_LEDOff(LED4);
-      break;
-    default:
-      STM_EVAL_LEDOff(LED1);
-      STM_EVAL_LEDOff(LED2);
-      STM_EVAL_LEDOff(LED3);
-      STM_EVAL_LEDOff(LED4); 
-      break;
-  }
- 
-  SetEPRxStatus(ENDP1, EP_RX_VALID);
- 
-}
-
-/*******************************************************************************
-* Function Name  : EP1_IN_Callback.
-* Description    : EP1 IN Callback Routine.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-void EP1_IN_Callback(void)
-{
-  PrevXferComplete = 1;
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

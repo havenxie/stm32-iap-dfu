@@ -58,7 +58,7 @@ void USART_To_USB_Send_Data(void);
 void ADC_Configuration(void);
 void Handle_USBAsynchXfer (void);
 void Get_SerialNum(void);
-
+void GPIO_Configuration(void);
 /* External variables --------------------------------------------------------*/
 
 #endif  /*__HW_CONFIG_H*/
