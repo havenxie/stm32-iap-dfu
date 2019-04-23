@@ -66,8 +66,8 @@
 //#define USE_STM3210E_EVAL
 //#define USE_STM32L152_EVAL
 //#define USE_STM32L152D_EVAL
-//#define (USE_STM32373C_EVAL)
-#define (USE_STM32303C_EVAL)
+//#define USE_STM32373C_EVAL
+ #define USE_STM32303C_EVAL
 #endif
 
 /*Unique Devices IDs register set*/
@@ -94,17 +94,21 @@
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
 #ifdef USE_STM3210B_EVAL
-  #define USB_DISCONNECT                      GPIOD  
-  #define USB_DISCONNECT_PIN                  GPIO_Pin_9
-  #define RCC_APB2Periph_GPIO_DISCONNECT      RCC_APB2Periph_GPIOD
-  #define EVAL_COM1_IRQHandler                USART1_IRQHandler 
-
-  #define ADC1_DR_Address                     ((uint32_t)0x4001244C)
+//  #define USB_DISCONNECT                      GPIOD  
+//  #define USB_DISCONNECT_PIN                  GPIO_Pin_9
+//  #define RCC_APB2Periph_GPIO_DISCONNECT      RCC_APB2Periph_GPIOD
+  #define USB_DISCONNECT                      GPIOA
+  #define USB_DISCONNECT_PIN                  GPIO_Pin_15
+  #define RCC_APB2Periph_GPIO_DISCONNECT      RCC_APB2Periph_GPIOA
   
-    #define RCC_APB2Periph_GPIO_IOAIN           RCC_APB2Periph_GPIOB
   #define GPIO_IOAIN                          GPIOB
   #define GPIO_IOAIN_PIN                      GPIO_Pin_0   /* PC.04 */
   #define ADC_AIN_CHANNEL                     ADC_Channel_8
+  #define RCC_APB2Periph_GPIO_IOAIN           RCC_APB2Periph_GPIOB
+  
+  #define ADC1_DR_Address                     ((uint32_t)0x4001244C)
+ 
+  #define EVAL_COM1_IRQHandler                USART1_IRQHandler 
   
 #elif defined (USE_STM3210E_EVAL)
   #define USB_DISCONNECT                      GPIOB  

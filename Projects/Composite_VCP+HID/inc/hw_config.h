@@ -38,10 +38,12 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
-#define MASS_MEMORY_START     0x04002000
-#define BULK_MAX_PACKET_SIZE  0x00000040
-#define LED_ON                0xF0
-#define LED_OFF               0xFF
+#define SUPPORT_DFU          0 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
+#define USE_BKP_SAVE_FLAG    1
+
+#if (USE_BKP_SAVE_FLAG == 1)
+  #define IAP_FLAG_ADDR    BKP_DR1
+#endif
 
 #define USART_RX_DATA_SIZE   2048
 /* Exported functions ------------------------------------------------------- */
@@ -59,6 +61,7 @@ void ADC_Configuration(void);
 void Handle_USBAsynchXfer (void);
 void Get_SerialNum(void);
 void GPIO_Configuration(void);
+void Delay(__IO uint32_t nCount);
 /* External variables --------------------------------------------------------*/
 
 #endif  /*__HW_CONFIG_H*/
