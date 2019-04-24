@@ -53,7 +53,7 @@ void Delay(__IO uint32_t nCount);
 *******************************************************************************/
 int main(void)
 {
-  uint8_t thisCnt = 6; 
+  uint8_t thisCnt = 5; 
     
 #if (SUPPORT_DFU == 1)
   NVIC_SetVectorTable(FLASH_BASE, 0x4000);

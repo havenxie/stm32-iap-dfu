@@ -39,7 +39,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 /* USB Standard Device Descriptor */
-const uint8_t CustomHID_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
+const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
   {
     0x12,   /* bLength */
     USB_DEVICE_DESCRIPTOR_TYPE,     /* bDescriptorType */
@@ -51,7 +51,7 @@ const uint8_t CustomHID_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
     0x40,   /* bMaxPacketSize0 */
     0x83,
     0x04,   /* idVendor = 0x0483 */
-    0x40,
+    0x50,
     0x57,   /* idProduct = 0x5740 */
     0x00,
     0x02,   /* bcdDevice = 2.00 */
@@ -62,7 +62,7 @@ const uint8_t CustomHID_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
   };
 
   /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
-const uint8_t CustomHID_ConfigDescriptor[] =
+const uint8_t CustomHID_VCP_ConfigDescriptor[] =
   {
     /*Configuration Descriptor*/
     0x09,   /* bLength: Configuration Descriptor size */
@@ -211,8 +211,8 @@ const uint8_t CustomHID_ConfigDescriptor[] =
     /* 41 */
   };
   
-   /* CustomHID_ConfigDescriptor */
-const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
+   /* CustomHID_VCP_ConfigDescriptor */
+const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
   { 
 	  //for usb dfu
       /* USER CODE BEGIN 0 */      
@@ -228,123 +228,7 @@ const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
 //      0x95, 0x01, /* REPORT_COUNT (1) */
 //      0xB1, 0x82, /* FEATURE (Data,Var,Abs,Vol */
 //      /* USER CODE END 0 */
-//      0xC0 /* END_COLLECTION */
-    
-//	//for usb hid demo
-//    0x06, 0xFF, 0x00,      /* USAGE_PAGE (Vendor Page: 0xFF00) *///2 global                    
-//    0x09, 0x01,            /* USAGE (Demo Kit)               */  //3 local   
-//    0xa1, 0x01,            /* COLLECTION (Application)       */  //1 main
-//           
-//    /* 6 */
-//    
-//    /* Led 1 */        
-//    0x85, 0x01,            /*     REPORT_ID (1)		         */  //2 global
-//    0x09, 0x01,            /*     USAGE (LED 1)	             */  //3 local
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */  //2 global        
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */  //2 global         
-//    0x75, 0x08,            /*     REPORT_SIZE (8)            */  //2 global      
-//    0x95, 0x01,            /*     REPORT_COUNT (1)           */  //2 global    
-//    0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */  //1 main
-
-//    0x85, 0x01,            /*     REPORT_ID (1)              */  //2 global
-//    0x09, 0x01,            /*     USAGE (LED 1)              */  //3 local
-//    0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */  //1 main
-//    /* 26 */
-//    
-//    /* Led 2 */
-//    0x85, 0x02,            /*     REPORT_ID 2		     */
-//    0x09, 0x02,            /*     USAGE (LED 2)	             */
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-//    0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-//    0x95, 0x01,            /*     REPORT_COUNT (1)           */       
-//    0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
-
-//    0x85, 0x02,            /*     REPORT_ID (2)              */
-//    0x09, 0x02,            /*     USAGE (LED 2)              */
-//    0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
-//    /* 46 */
-//    
-//    /* Led 3 */        
-//    0x85, 0x03,            /*     REPORT_ID (3)		     */
-//    0x09, 0x03,            /*     USAGE (LED 3)	             */
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-//    0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-//    0x95, 0x01,            /*     REPORT_COUNT (1)           */       
-//    0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
-
-//    0x85, 0x03,            /*     REPORT_ID (3)              */
-//    0x09, 0x03,            /*     USAGE (LED 3)              */
-//    0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
-//    /* 66 */
-//    
-//    /* Led 4 */
-//    0x85, 0x04,            /*     REPORT_ID 4)		     */
-//    0x09, 0x04,            /*     USAGE (LED 4)	             */
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
-//    0x75, 0x08,            /*     REPORT_SIZE (8)            */        
-//    0x95, 0x01,            /*     REPORT_COUNT (1)           */       
-//    0xB1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */     
-
-//    0x85, 0x04,            /*     REPORT_ID (4)              */
-//    0x09, 0x04,            /*     USAGE (LED 4)              */
-//    0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
-//    /* 86 */
-//    
-//    /* key Push Button */  
-//    0x85, 0x05,            /*     REPORT_ID (5)              */  //2 global
-//    0x09, 0x05,            /*     USAGE (Push Button)        */  //3 local    
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */  //2 global    
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */  //2 global    
-//    0x75, 0x01,            /*     REPORT_SIZE (1)            */  //2 global
-//    0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */  //1 main
-//    
-//    0x09, 0x05,            /*     USAGE (Push Button)        */  //3 local            
-//    0x75, 0x01,            /*     REPORT_SIZE (1)            */  //2 global         
-//    0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  //1 main
-//         
-//    0x75, 0x07,            /*     REPORT_SIZE (7)            */  //2 global         
-//    0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */  //1 main
-//	
-//    0x85, 0x05,            /*     REPORT_ID (5)              */  //2 global                   
-//    0x75, 0x07,            /*     REPORT_SIZE (7)            */  //2 global         
-//    0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */  //1 main                  
-//    /* 114 */
-
-//    /* Tamper Push Button */  
-//    0x85, 0x06,            /*     REPORT_ID (6)              */
-//    0x09, 0x06,            /*     USAGE (Tamper Push Button) */      
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
-//    0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
-//    0x75, 0x01,            /*     REPORT_SIZE (1)            */  
-//    0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
-//    
-//    0x09, 0x06,            /*     USAGE (Tamper Push Button) */               
-//    0x75, 0x01,            /*     REPORT_SIZE (1)            */           
-//    0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
-//         
-//    0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-//    0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */         
-//	
-//    0x85, 0x06,            /*     REPORT_ID (6)              */           
-//    0x75, 0x07,            /*     REPORT_SIZE (7)            */           
-//    0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */  
-//    /* 142 */
-//    
-//    /* ADC IN */
-//    0x85, 0x07,            /*     REPORT_ID (7)              */  //2 gloabl      
-//    0x09, 0x07,            /*     USAGE (ADC IN)             */  //3 local        
-//    0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */  //2 global             
-//    0x26, 0xff, 0x00,      /*     LOGICAL_MAXIMUM (255)      */  //2 global               
-//    0x75, 0x08,            /*     REPORT_SIZE (8)            */  //2 global         
-//    0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */  //1 main
-//	
-//    0x85, 0x07,            /*     REPORT_ID (7)              */  //2 global
-//    0x09, 0x07,            /*     USAGE (ADC in)             */  //3 local                   
-//    0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  //1 mian                               
-//    /* 161 */   
+//      0xC0 /* END_COLLECTION */ 
 
 //    0xc0 	          /*     END_COLLECTION	             */
 		//for usb hid demo and usb dfu(my self version)
@@ -462,7 +346,7 @@ const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
   };
 
 /* USB String Descriptors */
-const uint8_t CustomHID_StringLangID[CUSTOMHID_SIZ_STRING_LANGID] =
+const uint8_t CustomHID_VCP_StringLangID[CUSTOMHID_SIZ_STRING_LANGID] =
   {
     CUSTOMHID_SIZ_STRING_LANGID,
     USB_STRING_DESCRIPTOR_TYPE,
@@ -470,7 +354,7 @@ const uint8_t CustomHID_StringLangID[CUSTOMHID_SIZ_STRING_LANGID] =
     0x04 /* LangID = 0x0409: U.S. English */
   };
 
-const uint8_t CustomHID_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
+const uint8_t CustomHID_VCP_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
   {
     CUSTOMHID_SIZ_STRING_VENDOR,     /* Size of Vendor string */
     USB_STRING_DESCRIPTOR_TYPE,             /* bDescriptorType*/
@@ -480,7 +364,7 @@ const uint8_t CustomHID_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
     'c', 0, 's', 0
   };
 
-const uint8_t CustomHID_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
+const uint8_t CustomHID_VCP_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
   {
     CUSTOMHID_SIZ_STRING_PRODUCT,          /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
@@ -490,7 +374,7 @@ const uint8_t CustomHID_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
     'M', 0, ' ', 0, 'P', 0, 'o', 0, 'r', 0, 't', 0, ' ', 0, ' ', 0
   };
 
-uint8_t CustomHID_StringSerial[CUSTOMHID_SIZ_STRING_SERIAL] =
+uint8_t CustomHID_VCP_StringSerial[CUSTOMHID_SIZ_STRING_SERIAL] =
   {
     CUSTOMHID_SIZ_STRING_SERIAL,           /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,                   /* bDescriptorType */

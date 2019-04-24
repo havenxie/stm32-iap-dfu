@@ -55,15 +55,15 @@ typedef enum _HID_REQUESTS
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
 
-#define CustomHID_GetConfiguration          NOP_Process
-//#define CustomHID_SetConfiguration          NOP_Process
-#define CustomHID_GetInterface              NOP_Process
-#define CustomHID_SetInterface              NOP_Process
-#define CustomHID_GetStatus                 NOP_Process
-#define CustomHID_ClearFeature              NOP_Process
-#define CustomHID_SetEndPointFeature        NOP_Process
-#define CustomHID_SetDeviceFeature          NOP_Process
-//#define CustomHID_SetDeviceAddress          NOP_Process
+#define CustomHID_VCP_GetConfiguration          NOP_Process
+//#define CustomHID_VCP_SetConfiguration          NOP_Process
+#define CustomHID_VCP_GetInterface              NOP_Process
+#define CustomHID_VCP_SetInterface              NOP_Process
+#define CustomHID_VCP_GetStatus                 NOP_Process
+#define CustomHID_VCP_ClearFeature              NOP_Process
+#define CustomHID_VCP_SetEndPointFeature        NOP_Process
+#define CustomHID_VCP_SetDeviceFeature          NOP_Process
+//#define CustomHID_VCP_SetDeviceAddress          NOP_Process
 
 #define SEND_ENCAPSULATED_COMMAND   0x00
 #define GET_ENCAPSULATED_RESPONSE   0x01
@@ -78,27 +78,27 @@ typedef enum _HID_REQUESTS
 #define REPORT_DESCRIPTOR                  0x22
 
 /* Exported functions ------------------------------------------------------- */
-void CustomHID_init(void);
-void CustomHID_Reset(void);
-void CustomHID_SetConfiguration(void);
-void CustomHID_SetDeviceAddress (void);
-void CustomHID_Status_In (void);
-void CustomHID_Status_Out (void);
-RESULT CustomHID_Data_Setup(uint8_t);
-RESULT CustomHID_NoData_Setup(uint8_t);
-RESULT CustomHID_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting);
-uint8_t *CustomHID_GetDeviceDescriptor(uint16_t );
-uint8_t *CustomHID_GetConfigDescriptor(uint16_t);
-uint8_t *CustomHID_GetStringDescriptor(uint16_t);
+void CustomHID_VCP_init(void);
+void CustomHID_VCP_Reset(void);
+void CustomHID_VCP_SetConfiguration(void);
+void CustomHID_VCP_SetDeviceAddress (void);
+void CustomHID_VCP_Status_In (void);
+void CustomHID_VCP_Status_Out (void);
+RESULT CustomHID_VCP_Data_Setup(uint8_t);
+RESULT CustomHID_VCP_NoData_Setup(uint8_t);
+RESULT CustomHID_VCP_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateSetting);
+uint8_t *CustomHID_VCP_GetDeviceDescriptor(uint16_t );
+uint8_t *CustomHID_VCP_GetConfigDescriptor(uint16_t);
+uint8_t *CustomHID_VCP_GetStringDescriptor(uint16_t);
 
-uint8_t *CustomHID_GetLineCoding(uint16_t Length);
-uint8_t *CustomHID_SetLineCoding(uint16_t Length);
+uint8_t *CustomHID_VCP_GetLineCoding(uint16_t Length);
+uint8_t *CustomHID_VCP_SetLineCoding(uint16_t Length);
 
-uint8_t *CustomHID_GetReportDescriptor(uint16_t Length);
-uint8_t *CustomHID_GetHIDDescriptor(uint16_t Length);
-uint8_t *CustomHID_GetProtocolValue(uint16_t Length);
-uint8_t *CustomHID_SetReport_Feature(uint16_t Length);
-RESULT CustomHID_SetProtocol(void);
+uint8_t *CustomHID_VCP_GetReportDescriptor(uint16_t Length);
+uint8_t *CustomHID_VCP_GetHIDDescriptor(uint16_t Length);
+uint8_t *CustomHID_VCP_GetProtocolValue(uint16_t Length);
+uint8_t *CustomHID_VCP_SetReport_Feature(uint16_t Length);
+RESULT CustomHID_VCP_SetProtocol(void);
 
 #endif /* __usb_prop_H */
 

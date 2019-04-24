@@ -68,7 +68,7 @@ extern LINE_CODING linecoding;
 *******************************************************************************/
 void Set_System(void)
 {
-#if !defined(STM32L1XX_MD) && !defined(STM32L1XX_HD) && !defined (STM32L1XX_MD_PLUS)
+#if defined (STM32F37X) || defined (STM32F30X)
   GPIO_InitTypeDef  GPIO_InitStructure;
 #endif /* USB_USE_EXTERNAL_PULLUP */ 
   
@@ -88,25 +88,18 @@ void Set_System(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_DISCONNECT, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
   GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-
-  /* Configure USB pull-up */
-  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
   
+  /* ADCCLK = PCLK2/8 */
+  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
+  
+#endif /* STM32L1XX_MD && STM32L1XX_XD */
+   
   /* Configure the used GPIOs*/
   GPIO_Configuration();
-
   USB_Cable_Config(DISABLE);
   Delay(100000);
   USB_Cable_Config(ENABLE);
   
-  /* ADCCLK = PCLK2/8 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
-
-#endif /* STM32L1XX_MD && STM32L1XX_XD */
-   
 #if defined(USB_USE_EXTERNAL_PULLUP)
   /* Enable the USB disconnect GPIO clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIO_DISCONNECT, ENABLE);
@@ -478,8 +471,8 @@ void Get_SerialNum(void)
 
   if (Device_Serial0 != 0)
   {
-    IntToUnicode (Device_Serial0, &CustomHID_StringSerial[2] , 8);
-    IntToUnicode (Device_Serial1, &CustomHID_StringSerial[18], 4);
+    IntToUnicode (Device_Serial0, &CustomHID_VCP_StringSerial[2] , 8);
+    IntToUnicode (Device_Serial1, &CustomHID_VCP_StringSerial[18], 4);
   }
 }
 

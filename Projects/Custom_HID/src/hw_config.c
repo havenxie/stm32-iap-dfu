@@ -75,6 +75,8 @@ void Set_System(void)
 #if !defined(STM32L1XX_MD) && !defined(STM32L1XX_HD) && !defined(STM32L1XX_MD_PLUS) && !defined(STM32F37X) && !defined(STM32F30X)
   /* Enable USB_DISCONNECT GPIO clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_DISCONNECT, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
   
   /* ADCCLK = PCLK2/8 */
   RCC_ADCCLKConfig(RCC_PCLK2_Div8);    
@@ -82,6 +84,9 @@ void Set_System(void)
   
   /* Configure the used GPIOs*/
   GPIO_Configuration();
+  USB_Cable_Config(DISABLE);
+  Delay(100000);
+  USB_Cable_Config(ENABLE);
   
 #if defined(STM32F37X) || defined(STM32F30X)
   
@@ -305,7 +310,7 @@ void USB_Cable_Config (FunctionalState NewState)
   }  
   
 #else /* USE_STM3210B_EVAL or USE_STM3210E_EVAL */
-  if (NewState != DISABLE)
+  if (NewState == DISABLE)
   {
     GPIO_ResetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);
   }
