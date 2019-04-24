@@ -69,6 +69,7 @@ DEVICE_PROP Device_Property =
     0,
     0x40 /*MAX PACKET SIZE*/
   };
+
 USER_STANDARD_REQUESTS User_Standard_Requests =
   {
     CustomHID_GetConfiguration,
@@ -93,7 +94,7 @@ ONE_DESCRIPTOR Config_Descriptor =
     (uint8_t*)CustomHID_ConfigDescriptor,
     CUSTOMHID_SIZ_CONFIG_DESC
   };
-
+  
 ONE_DESCRIPTOR CustomHID_Report_Descriptor =
   {
     (uint8_t *)CustomHID_ReportDescriptor,
@@ -132,11 +133,13 @@ uint8_t *CustomHID_SetReport_Feature(uint16_t Length);
 *******************************************************************************/
 void CustomHID_init(void)
 {
-  /* Update the serial number string descriptor with the data from the unique 
+
+  /* Update the serial number string descriptor with the data from the unique
   ID*/
   Get_SerialNum();
-    
+
   pInformation->Current_Configuration = 0;
+
   /* Connect the device */
   PowerOn();
 
@@ -184,8 +187,10 @@ void CustomHID_Reset(void)
 
   /* Set this device to response on default address */
   SetDeviceAddress(0);
+  
   bDeviceState = ATTACHED;
 }
+
 /*******************************************************************************
 * Function Name  : CustomHID_SetConfiguration.
 * Description    : Update the device state to configured and command the ADC 
@@ -211,6 +216,7 @@ void CustomHID_SetConfiguration(void)
 #endif /* STM32L1XX_XD */
   }
 }
+
 /*******************************************************************************
 * Function Name  : CustomHID_SetConfiguration.
 * Description    : Update the device state to addressed.
@@ -222,6 +228,7 @@ void CustomHID_SetDeviceAddress (void)
 {
   bDeviceState = ADDRESSED;
 }
+
 /*******************************************************************************
 * Function Name  : CustomHID_Status_In.
 * Description    : Joystick status IN routine.
@@ -342,6 +349,27 @@ RESULT CustomHID_Data_Setup(uint8_t RequestNo)
 }
 
 /*******************************************************************************
+* Function Name  : CustomHID_NoData_Setup.
+* Description    : handle the no data class specific requests.
+* Input          : Request Nb.
+* Output         : None.
+* Return         : USB_UNSUPPORT or USB_SUCCESS.
+*******************************************************************************/
+RESULT CustomHID_NoData_Setup(uint8_t RequestNo)
+{
+  if ((Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT))
+      && (RequestNo == SET_PROTOCOL))
+  {
+    return CustomHID_SetProtocol();
+  }
+
+  else
+  {
+    return USB_UNSUPPORT;
+  }
+}
+
+/*******************************************************************************
 * Function Name  : CustomHID_SetReport_Feature
 * Description    : Set Feature request handling
 * Input          : Length.
@@ -361,26 +389,7 @@ uint8_t *CustomHID_SetReport_Feature(uint16_t Length)
   }
 }
 
-/*******************************************************************************
-* Function Name  : CustomHID_NoData_Setup
-* Description    : handle the no data class specific requests
-* Input          : Request Nb.
-* Output         : None.
-* Return         : USB_UNSUPPORT or USB_SUCCESS.
-*******************************************************************************/
-RESULT CustomHID_NoData_Setup(uint8_t RequestNo)
-{
-  if ((Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT))
-      && (RequestNo == SET_PROTOCOL))
-  {
-    return CustomHID_SetProtocol();
-  }
 
-  else
-  {
-    return USB_UNSUPPORT;
-  }
-}
 
 /*******************************************************************************
 * Function Name  : CustomHID_GetDeviceDescriptor.

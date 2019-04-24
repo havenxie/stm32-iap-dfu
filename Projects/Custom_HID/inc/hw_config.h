@@ -34,15 +34,16 @@
 #include "platform_config.h"
 #include "usb_type.h"
 
-#define USE_BKP_SAVE_FLAG    1
-#if (USE_BKP_SAVE_FLAG == 1)
-  #define IAP_FLAG_ADDR    BKP_DR1
-#endif
-
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
+#define SUPPORT_DFU          1 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
+#define USE_BKP_SAVE_FLAG    1
+
+#if (USE_BKP_SAVE_FLAG == 1)
+  #define IAP_FLAG_ADDR    BKP_DR1
+#endif
 /* Exported functions ------------------------------------------------------- */
 void Set_System(void);
 void Set_USBClock(void);
