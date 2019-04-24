@@ -48,8 +48,6 @@
 #define CUSTOMHID_SIZ_DEVICE_DESC               18
 #define CUSTOMHID_SIZ_CONFIG_DESC               41
 //#define CUSTOMHID_SIZ_REPORT_DESC               23  //for usb dfu
-//#define CUSTOMHID_SIZ_REPORT_DESC               163   //for usb hid demo
-//#define CUSTOMHID_SIZ_REPORT_DESC               (163 + 15)  //for usb hid demo and usb dfu
 #define CUSTOMHID_SIZ_REPORT_DESC               158  //for usb hid demo and usb dfu(my self version)
 #define CUSTOMHID_SIZ_STRING_LANGID             4
 #define CUSTOMHID_SIZ_STRING_VENDOR             38

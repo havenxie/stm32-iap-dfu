@@ -349,7 +349,7 @@ void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct)
   else
   {
     /* Enable the USART2 Pins Software Remapping */
-    GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
+    //GPIO_PinRemapConfig(GPIO_Remap_USART2, ENABLE);
     RCC_APB1PeriphClockCmd(COM_USART_CLK[COM], ENABLE);
   }
 

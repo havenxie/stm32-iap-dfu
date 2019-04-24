@@ -68,7 +68,7 @@ extern LINE_CODING linecoding;
 *******************************************************************************/
 void Set_System(void)
 {
-#if defined(USB_USE_EXTERNAL_PULLUP)
+#if !defined(STM32L1XX_MD) && !defined(STM32L1XX_HD) && !defined (STM32L1XX_MD_PLUS)
   GPIO_InitTypeDef  GPIO_InitStructure;
 #endif /* USB_USE_EXTERNAL_PULLUP */ 
   
@@ -84,20 +84,27 @@ void Set_System(void)
 #endif /* STM32L1XX_XD */ 
    
 #if !defined(STM32L1XX_MD) && !defined(STM32L1XX_HD) && !defined(STM32L1XX_MD_PLUS) && !defined(STM32F37X) && !defined(STM32F30X)
-  /* Enable USB_DISCONNECT GPIO clock */
+  /* Enable "DISCONNECT" GPIO clock */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_DISCONNECT, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+  GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
-  /* ADCCLK = PCLK2/8 */
-  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
+  /* Configure USB pull-up */
+  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
   
   /* Configure the used GPIOs*/
   GPIO_Configuration();
+
+  USB_Cable_Config(DISABLE);
+  Delay(100000);
+  USB_Cable_Config(ENABLE);
   
-//  /* Configure USB pull-up pin */
-//  GPIO_InitStructure.GPIO_Pin = USB_DISCONNECT_PIN;
-//  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
-//  GPIO_Init(USB_DISCONNECT, &GPIO_InitStructure);
+  /* ADCCLK = PCLK2/8 */
+  RCC_ADCCLKConfig(RCC_PCLK2_Div8);
+
 #endif /* STM32L1XX_MD && STM32L1XX_XD */
    
 #if defined(USB_USE_EXTERNAL_PULLUP)
@@ -149,6 +156,7 @@ void Set_System(void)
   
   STM_EVAL_LEDInit(LED1);
   ADC_Configuration();
+  
 }
 
 /*******************************************************************************
@@ -263,7 +271,10 @@ void USB_Interrupts_Config(void)
 #endif /* STM32L1XX_XD */
 
   /* Enable USART Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM1_IRQn;
+//  NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM1_IRQn;
+//  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+//  NVIC_Init(&NVIC_InitStructure);
+  NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM2_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
   NVIC_Init(&NVIC_InitStructure);
   
@@ -302,7 +313,7 @@ void USB_Cable_Config (FunctionalState NewState)
   }  
   
 #else /* USE_STM3210B_EVAL or USE_STM3210E_EVAL */
-  if (NewState != DISABLE)
+  if (NewState == DISABLE)
   {
     GPIO_ResetBits(USB_DISCONNECT, USB_DISCONNECT_PIN);
   }
@@ -525,10 +536,10 @@ void USART_Config_Default(void)
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
   /* Configure and enable the USART */
-  STM_EVAL_COMInit(COM1, &USART_InitStructure);
+  STM_EVAL_COMInit(COM2, &USART_InitStructure);
 
   /* Enable the USART Receive interrupt */
-  USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
+  USART_ITConfig(EVAL_COM2, USART_IT_RXNE, ENABLE);
 }
 
 /*******************************************************************************
@@ -610,7 +621,7 @@ bool USART_Config(void)
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
  
   /* Configure and enable the USART */
-  STM_EVAL_COMInit(COM1, &USART_InitStructure);
+  STM_EVAL_COMInit(COM2, &USART_InitStructure);
 
   return (TRUE);
 }
@@ -629,8 +640,8 @@ void USB_To_USART_Send_Data(uint8_t* data_buffer, uint8_t Nb_bytes)
   
   for (i = 0; i < Nb_bytes; i++)
   {
-    USART_SendData(EVAL_COM1, *(data_buffer + i));
-    while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET); 
+    USART_SendData(EVAL_COM2, *(data_buffer + i));
+    while(USART_GetFlagStatus(EVAL_COM2, USART_FLAG_TXE) == RESET); 
   }  
 }
 
@@ -702,11 +713,11 @@ void USART_To_USB_Send_Data(void)
   
   if (linecoding.datatype == 7)
   {
-    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
+    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM2) & 0x7F;
   }
   else if (linecoding.datatype == 8)
   {
-    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
+    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM2);
   }
   
   USART_Rx_ptr_in++;

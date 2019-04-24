@@ -38,7 +38,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
-#define SUPPORT_DFU          0 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
+#define SUPPORT_DFU          1 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
 #define USE_BKP_SAVE_FLAG    1
 
 #if (USE_BKP_SAVE_FLAG == 1)

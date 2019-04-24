@@ -121,13 +121,13 @@ typedef enum
   * @{
   */
 #define LEDn                             4
-#define LED1_PIN                         GPIO_Pin_13
-#define LED1_GPIO_PORT                   GPIOC
-#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC  
+//#define LED1_PIN                         GPIO_Pin_13
+//#define LED1_GPIO_PORT                   GPIOC
+//#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOC  
   
-//#define LED1_PIN                         GPIO_Pin_9
-//#define LED1_GPIO_PORT                   GPIOA
-//#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOA
+#define LED1_PIN                         GPIO_Pin_9
+#define LED1_GPIO_PORT                   GPIOA
+#define LED1_GPIO_CLK                    RCC_APB2Periph_GPIOA
 
 #define LED2_PIN                         GPIO_Pin_7
 #define LED2_GPIO_PORT                   GPIOC
@@ -264,12 +264,12 @@ typedef enum
  */ 
 #define EVAL_COM2                        USART2
 #define EVAL_COM2_CLK                    RCC_APB1Periph_USART2
-#define EVAL_COM2_TX_PIN                 GPIO_Pin_5
-#define EVAL_COM2_TX_GPIO_PORT           GPIOD
-#define EVAL_COM2_TX_GPIO_CLK            RCC_APB2Periph_GPIOD
-#define EVAL_COM2_RX_PIN                 GPIO_Pin_6
-#define EVAL_COM2_RX_GPIO_PORT           GPIOD
-#define EVAL_COM2_RX_GPIO_CLK            RCC_APB2Periph_GPIOD
+#define EVAL_COM2_TX_PIN                 GPIO_Pin_2
+#define EVAL_COM2_TX_GPIO_PORT           GPIOA
+#define EVAL_COM2_TX_GPIO_CLK            RCC_APB2Periph_GPIOA
+#define EVAL_COM2_RX_PIN                 GPIO_Pin_3
+#define EVAL_COM2_RX_GPIO_PORT           GPIOA
+#define EVAL_COM2_RX_GPIO_CLK            RCC_APB2Periph_GPIOA
 #define EVAL_COM2_IRQn                   USART2_IRQn
 
 /**

@@ -46,8 +46,8 @@
 #define CUSTOMHID_SIZ_HID_DESC                  0x09
 #define CUSTOMHID_OFF_HID_DESC                  0x12
 #define CUSTOMHID_SIZ_DEVICE_DESC               18
-#define CUSTOMHID_SIZ_REPORT_DESC               158 + 5 //for usb hid demo 
-
+//#define CUSTOMHID_SIZ_REPORT_DESC               158 + 5 //for usb hid demo 
+#define CUSTOMHID_SIZ_REPORT_DESC               158  //for usb hid demo and usb dfu(my self version)
 #define VIRTUAL_COM_PORT_DATA_SIZE              64
 #define VIRTUAL_COM_PORT_INT_SIZE               8
 

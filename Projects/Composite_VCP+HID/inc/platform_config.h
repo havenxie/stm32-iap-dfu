@@ -109,6 +109,7 @@
   #define ADC1_DR_Address                     ((uint32_t)0x4001244C)
  
   #define EVAL_COM1_IRQHandler                USART1_IRQHandler 
+  #define EVAL_COM2_IRQHandler                USART2_IRQHandler 
   
 #elif defined (USE_STM3210E_EVAL)
   #define USB_DISCONNECT                      GPIOB  
