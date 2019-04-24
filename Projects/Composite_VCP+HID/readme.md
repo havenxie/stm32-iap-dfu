@@ -24,7 +24,12 @@
   *
   ******************************************************************************
   */
-
+  NEXT TODO:
+  1. modify report description and support dfu.
+  2. modify define name
+  3. modify uart to PA02 PA03
+  4. modify LED_PC13 to PA09
+  5. modify USB_ConnectPin to PA15
 
 Example description
 ===================

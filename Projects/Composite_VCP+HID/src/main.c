@@ -4,7 +4,7 @@
   * @author  MCD Application Team
   * @version V4.0.0
   * @date    21-January-2013
-  * @brief   Virtual Com Port Demo main file
+  * @brief   VCP + HID Demo main file
   ******************************************************************************
   * @attention
   *
