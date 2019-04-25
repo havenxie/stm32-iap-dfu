@@ -51,8 +51,8 @@ const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
     0x40,   /* bMaxPacketSize0 */
     0x83,
     0x04,   /* idVendor = 0x0483 */
-    0x50,
-    0x57,   /* idProduct = 0x5740 */
+    0x51,
+    0x57,   /* idProduct = 0x5751 */
     0x00,
     0x02,   /* bcdDevice = 2.00 */
     1,              /* Index of string descriptor describing manufacturer */
@@ -76,6 +76,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x32,   /* MaxPower 100 mA */
 	  
     /* Interface Association Descriptor(IAD Descriptor)  */ 
+	/* 9 */
 	0x08,   /*   bLength  */
 	0x0B,   /*   bDescriptorType*/
 	0x00,   /*    bFirstInterface*/
@@ -86,6 +87,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
 	0x00,   /*   iFunction */
 
     /*Interface Descriptor*/
+	/* 17 */
     0x09,   /* bLength: Interface Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,  /* bDescriptorType: Interface */
     /* Interface descriptor type */
@@ -97,29 +99,34 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x01,   /* bInterfaceProtocol: Common AT commands */
     0x00,   /* iInterface: */
     /*Header Functional Descriptor*/
+	/* 26 */
     0x05,   /* bLength: Endpoint Descriptor size */
     0x24,   /* bDescriptorType: CS_INTERFACE */
     0x00,   /* bDescriptorSubtype: Header Func Desc */
     0x10,   /* bcdCDC: spec release number */
     0x01,
     /*Call Management Functional Descriptor*/
+	/* 31 */
     0x05,   /* bFunctionLength */
     0x24,   /* bDescriptorType: CS_INTERFACE */
     0x01,   /* bDescriptorSubtype: Call Management Func Desc */
     0x00,   /* bmCapabilities: D0+D1 */
     0x01,   /* bDataInterface: 1 */
     /*ACM Functional Descriptor*/
+	/* 36 */
     0x04,   /* bFunctionLength */
     0x24,   /* bDescriptorType: CS_INTERFACE */
     0x02,   /* bDescriptorSubtype: Abstract Control Management desc */
     0x02,   /* bmCapabilities */
     /*Union Functional Descriptor*/
+	/* 40 */
     0x05,   /* bFunctionLength */
     0x24,   /* bDescriptorType: CS_INTERFACE */
     0x06,   /* bDescriptorSubtype: Union func desc */
     0x00,   /* bMasterInterface: Communication class interface */
     0x01,   /* bSlaveInterface0: Data Class Interface */
     /*Endpoint 2 Descriptor*/
+	/* 45 */
     0x07,   /* bLength: Endpoint Descriptor size */
     USB_ENDPOINT_DESCRIPTOR_TYPE,   /* bDescriptorType: Endpoint */
     0x82,   /* bEndpointAddress: (IN2) */
@@ -129,6 +136,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0xFF,   /* bInterval: */
     
     /*Data class interface descriptor*/
+	/* 52 */
     0x09,   /* bLength: Endpoint Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,  /* bDescriptorType: */
     0x01,   /* bInterfaceNumber: Number of Interface */
@@ -139,6 +147,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x00,   /* bInterfaceProtocol: */
     0x00,   /* iInterface: */
     /*Endpoint 3 Descriptor*/
+	/* 61 */
     0x07,   /* bLength: Endpoint Descriptor size */
     USB_ENDPOINT_DESCRIPTOR_TYPE,   /* bDescriptorType: Endpoint */
     0x03,   /* bEndpointAddress: (OUT3) */
@@ -147,6 +156,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x00,
     0x00,   /* bInterval: ignore for Bulk transfer */
     /*Endpoint 1 Descriptor*/
+	/* 68 */
     0x07,   /* bLength: Endpoint Descriptor size */
     USB_ENDPOINT_DESCRIPTOR_TYPE,   /* bDescriptorType: Endpoint */
     0x84,   /* bEndpointAddress: (IN4) */
@@ -156,6 +166,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x00,    /* bInterval */
 	
     /*********************************IAD Descriptor*********************************/
+	/* 75 */
     0x08,    //?????
     0x0B,    //IAD?????
     0x02,    //bFirstInterface
@@ -166,7 +177,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x05,    //iFunction
 	
     /************** Descriptor of Custom HID interface ****************/
-    /* 09 */
+    /* 83 */
     0x09,         /* bLength: Interface Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,/* bDescriptorType: Interface descriptor type */
     0x02,         /* bInterfaceNumber: Number of Interface */
@@ -177,7 +188,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x00,         /* nInterfaceProtocol : 0=none, 1=keyboard, 2=mouse */
     0,            /* iInterface: Index of string descriptor */
     /******************** Descriptor of Custom HID HID ********************/
-    /* 18 */
+    /* 92 */
     0x09,         /* bLength: HID Descriptor size */
     HID_DESCRIPTOR_TYPE, /* bDescriptorType: HID */
     0x10,         /* bcdHID: HID Class Spec release number */
@@ -188,7 +199,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     CUSTOMHID_SIZ_REPORT_DESC,/* wItemLength: Total length of Report descriptor */
     0x00,
     /******************** Descriptor of Custom HID endpoints ******************/
-    /* 27 */
+    /* 101 */
     0x07,          /* bLength: Endpoint Descriptor size */
     USB_ENDPOINT_DESCRIPTOR_TYPE, /* bDescriptorType: */
 
@@ -197,8 +208,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x02,          /* wMaxPacketSize: 2 Bytes max */
     0x00,
     0x20,          /* bInterval: Polling Interval (32 ms) */
-    /* 34 */
-    	
+    /* 108 */
     0x07,	/* bLength: Endpoint Descriptor size */
     USB_ENDPOINT_DESCRIPTOR_TYPE,	/* bDescriptorType: */
 			/*	Endpoint descriptor type */
@@ -208,7 +218,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x02,	/* wMaxPacketSize: 2 Bytes max  */
     0x00,
     0x20	/* bInterval: Polling Interval (32 ms) */
-    /* 41 */
+    /* 115 */
   };
   
    /* CustomHID_VCP_ConfigDescriptor */

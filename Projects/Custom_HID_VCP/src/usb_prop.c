@@ -351,10 +351,12 @@ RESULT CustomHID_VCP_Data_Setup(uint8_t RequestNo)
       }
       Request = SET_LINE_CODING;
     }
-    else if (RequestNo == GET_DESCRIPTOR)
+    else if ((RequestNo == GET_DESCRIPTOR) 
+		&& (Type_Recipient == (STANDARD_REQUEST | INTERFACE_RECIPIENT))
+	      )
     {
-      if (Type_Recipient == (STANDARD_REQUEST | INTERFACE_RECIPIENT))
-      {
+      //if (Type_Recipient == (STANDARD_REQUEST | INTERFACE_RECIPIENT))
+      //{
         if (pInformation->USBwValue1 == REPORT_DESCRIPTOR)
         {
           CopyRoutine = CustomHID_VCP_GetReportDescriptor;
@@ -363,7 +365,7 @@ RESULT CustomHID_VCP_Data_Setup(uint8_t RequestNo)
         {
           CopyRoutine = CustomHID_VCP_GetHIDDescriptor;
         }
-      }
+      //}
     }
     else if ( (Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT)) )
     {         
@@ -400,8 +402,7 @@ RESULT CustomHID_VCP_Data_Setup(uint8_t RequestNo)
 * Return         : USB_UNSUPPORT or USB_SUCCESS.
 *******************************************************************************/
 RESULT CustomHID_VCP_NoData_Setup(uint8_t RequestNo)
-{
-
+{  
   if (Type_Recipient == (CLASS_REQUEST | INTERFACE_RECIPIENT))
   {
     if (RequestNo == SET_COMM_FEATURE)

@@ -40,10 +40,10 @@
 #define USB_STRING_DESCRIPTOR_TYPE              0x03
 #define USB_INTERFACE_DESCRIPTOR_TYPE           0x04
 #define USB_ENDPOINT_DESCRIPTOR_TYPE            0x05
-
 #define HID_DESCRIPTOR_TYPE                     0x21
+
 #define CUSTOMHID_SIZ_HID_DESC                  0x09
-#define CUSTOMHID_OFF_HID_DESC                  0x12
+#define CUSTOMHID_OFF_HID_DESC                  92
 
 #define CUSTOMHID_SIZ_DEVICE_DESC               18
 #define CUSTOMHID_SIZ_CONFIG_DESC               115
