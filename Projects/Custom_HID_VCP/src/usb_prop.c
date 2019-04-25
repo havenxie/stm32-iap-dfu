@@ -94,33 +94,33 @@ USER_STANDARD_REQUESTS User_Standard_Requests =
 ONE_DESCRIPTOR Device_Descriptor =
   {
     (uint8_t*)CustomHID_VCP_DeviceDescriptor,
-    CUSTOMHID_SIZ_DEVICE_DESC
+    CUSTOMHID_VCP_SIZ_DEVICE_DESC
   };
 
 ONE_DESCRIPTOR Config_Descriptor =
   {
     (uint8_t*)CustomHID_VCP_ConfigDescriptor,
-    CUSTOMHID_SIZ_CONFIG_DESC
+    CUSTOMHID_VCP_SIZ_CONFIG_DESC
   };
   
 ONE_DESCRIPTOR CustomHID_VCP_Report_Descriptor =
   {
     (uint8_t *)CustomHID_VCP_ReportDescriptor,
-    CUSTOMHID_SIZ_REPORT_DESC
+    CUSTOMHID_VCP_SIZ_REPORT_DESC
   };
 
 ONE_DESCRIPTOR CustomHID_VCP_Hid_Descriptor =
   {
-    (uint8_t*)CustomHID_VCP_ConfigDescriptor + CUSTOMHID_OFF_HID_DESC,
-    CUSTOMHID_SIZ_HID_DESC
+    (uint8_t*)CustomHID_VCP_ConfigDescriptor + CUSTOMHID_VCP_OFF_HID_DESC,
+    CUSTOMHID_VCP_SIZ_HID_DESC
   };
   
 ONE_DESCRIPTOR String_Descriptor[4] =
   {
-    {(uint8_t*)CustomHID_VCP_StringLangID, CUSTOMHID_SIZ_STRING_LANGID},
-    {(uint8_t*)CustomHID_VCP_StringVendor, CUSTOMHID_SIZ_STRING_VENDOR},
-    {(uint8_t*)CustomHID_VCP_StringProduct, CUSTOMHID_SIZ_STRING_PRODUCT},
-    {(uint8_t*)CustomHID_VCP_StringSerial, CUSTOMHID_SIZ_STRING_SERIAL}
+    {(uint8_t*)CustomHID_VCP_StringLangID, CUSTOMHID_VCP_SIZ_STRING_LANGID},
+    {(uint8_t*)CustomHID_VCP_StringVendor, CUSTOMHID_VCP_SIZ_STRING_VENDOR},
+    {(uint8_t*)CustomHID_VCP_StringProduct, CUSTOMHID_VCP_SIZ_STRING_PRODUCT},
+    {(uint8_t*)CustomHID_VCP_StringSerial, CUSTOMHID_VCP_SIZ_STRING_SERIAL}
   };
 
 /* Extern variables ----------------------------------------------------------*/
@@ -171,7 +171,7 @@ void CustomHID_VCP_Reset(void)
 {
   /* Set CustomHID_VCP_DEVICE as not configured */
   pInformation->Current_Configuration = 0;
-  pInformation->Current_Interface = 0;/*the default Interface*/
+  pInformation->Current_Interface = 1;/*the default Interface*/
   
   /* Current Feature initialization */
   pInformation->Current_Feature = CustomHID_VCP_ConfigDescriptor[7];
@@ -195,12 +195,6 @@ void CustomHID_VCP_Reset(void)
   SetEPRxCount(ENDP1, 2);
   SetEPRxStatus(ENDP1, EP_RX_VALID);
   SetEPTxStatus(ENDP1, EP_TX_NAK);
-  
-  /* Initialize Endpoint 4 */
-  SetEPType(ENDP4, EP_BULK);
-  SetEPTxAddr(ENDP4, ENDP4_TXADDR);
-  SetEPTxStatus(ENDP4, EP_TX_NAK);
-  SetEPRxStatus(ENDP4, EP_RX_DIS);
 
   /* Initialize Endpoint 2 */
   SetEPType(ENDP2, EP_INTERRUPT);
@@ -215,6 +209,12 @@ void CustomHID_VCP_Reset(void)
   SetEPRxStatus(ENDP3, EP_RX_VALID);
   SetEPTxStatus(ENDP3, EP_TX_DIS);
 
+  /* Initialize Endpoint 4 */
+  SetEPType(ENDP4, EP_BULK);
+  SetEPTxAddr(ENDP4, ENDP4_TXADDR);
+  SetEPTxStatus(ENDP4, EP_TX_NAK);
+  SetEPRxStatus(ENDP4, EP_RX_DIS);
+  
   /* Set this device to response on default address */
   SetDeviceAddress(0);
   

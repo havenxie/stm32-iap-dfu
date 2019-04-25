@@ -155,4 +155,6 @@ del *.htm /s
 del *.map /s
 del *.htm /s
 del *.txt /s
+del Projects/*.bat /s
+::del *.uvgui.* /s
 exit

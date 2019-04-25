@@ -39,7 +39,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 /* USB Standard Device Descriptor */
-const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
+const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_VCP_SIZ_DEVICE_DESC] =
   {
     0x12,   /* bLength */
     USB_DEVICE_DESCRIPTOR_TYPE,     /* bDescriptorType */
@@ -62,14 +62,14 @@ const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_SIZ_DEVICE_DESC] =
   };
 
   /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
-const uint8_t CustomHID_VCP_ConfigDescriptor[] =
+const uint8_t CustomHID_VCP_ConfigDescriptor[CUSTOMHID_VCP_SIZ_CONFIG_DESC] =
   {
     /*Configuration Descriptor*/
     0x09,   /* bLength: Configuration Descriptor size */
     USB_CONFIGURATION_DESCRIPTOR_TYPE,      /* bDescriptorType: Configuration */
-    CUSTOMHID_SIZ_CONFIG_DESC,       /* wTotalLength:no of returned bytes */
+    CUSTOMHID_VCP_SIZ_CONFIG_DESC,       /* wTotalLength:no of returned bytes */
     0x00,
-    0x03,   /* bNumInterfaces: 2 interface */
+    0x03,   /* bNumInterfaces: 3 interface */
     0x01,   /* bConfigurationValue: Configuration value */
     0x00,   /* iConfiguration: Index of string descriptor describing the configuration */
     0xC0,   /* bmAttributes: self powered */
@@ -196,7 +196,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
     0x00,         /* bCountryCode: Hardware target country */
     0x01,         /* bNumDescriptors: Number of HID class descriptors to follow */
     0x22,         /* bDescriptorType */
-    CUSTOMHID_SIZ_REPORT_DESC,/* wItemLength: Total length of Report descriptor */
+    CUSTOMHID_VCP_SIZ_REPORT_DESC,/* wItemLength: Total length of Report descriptor */
     0x00,
     /******************** Descriptor of Custom HID endpoints ******************/
     /* 101 */
@@ -222,7 +222,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[] =
   };
   
    /* CustomHID_VCP_ConfigDescriptor */
-const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
+const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_VCP_SIZ_REPORT_DESC] =
   { 
 	  //for usb dfu
       /* USER CODE BEGIN 0 */      
@@ -356,17 +356,17 @@ const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
   };
 
 /* USB String Descriptors */
-const uint8_t CustomHID_VCP_StringLangID[CUSTOMHID_SIZ_STRING_LANGID] =
+const uint8_t CustomHID_VCP_StringLangID[CUSTOMHID_VCP_SIZ_STRING_LANGID] =
   {
-    CUSTOMHID_SIZ_STRING_LANGID,
+    CUSTOMHID_VCP_SIZ_STRING_LANGID,
     USB_STRING_DESCRIPTOR_TYPE,
     0x09,
     0x04 /* LangID = 0x0409: U.S. English */
   };
 
-const uint8_t CustomHID_VCP_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
+const uint8_t CustomHID_VCP_StringVendor[CUSTOMHID_VCP_SIZ_STRING_VENDOR] =
   {
-    CUSTOMHID_SIZ_STRING_VENDOR,     /* Size of Vendor string */
+    CUSTOMHID_VCP_SIZ_STRING_VENDOR,     /* Size of Vendor string */
     USB_STRING_DESCRIPTOR_TYPE,             /* bDescriptorType*/
     /* Manufacturer: "STMicroelectronics" */
     'S', 0, 'T', 0, 'M', 0, 'i', 0, 'c', 0, 'r', 0, 'o', 0, 'e', 0,
@@ -374,9 +374,9 @@ const uint8_t CustomHID_VCP_StringVendor[CUSTOMHID_SIZ_STRING_VENDOR] =
     'c', 0, 's', 0
   };
 
-const uint8_t CustomHID_VCP_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
+const uint8_t CustomHID_VCP_StringProduct[CUSTOMHID_VCP_SIZ_STRING_PRODUCT] =
   {
-    CUSTOMHID_SIZ_STRING_PRODUCT,          /* bLength */
+    CUSTOMHID_VCP_SIZ_STRING_PRODUCT,          /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
     /* Product name: "STM32 Virtual COM Port" */
     'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0, ' ', 0, 'V', 0, 'i', 0,
@@ -384,9 +384,9 @@ const uint8_t CustomHID_VCP_StringProduct[CUSTOMHID_SIZ_STRING_PRODUCT] =
     'M', 0, ' ', 0, 'P', 0, 'o', 0, 'r', 0, 't', 0, ' ', 0, ' ', 0
   };
 
-uint8_t CustomHID_VCP_StringSerial[CUSTOMHID_SIZ_STRING_SERIAL] =
+uint8_t CustomHID_VCP_StringSerial[CUSTOMHID_VCP_SIZ_STRING_SERIAL] =
   {
-    CUSTOMHID_SIZ_STRING_SERIAL,           /* bLength */
+    CUSTOMHID_VCP_SIZ_STRING_SERIAL,           /* bLength */
     USB_STRING_DESCRIPTOR_TYPE,                   /* bDescriptorType */
     'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0
   };

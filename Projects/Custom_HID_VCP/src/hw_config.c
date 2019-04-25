@@ -97,7 +97,7 @@ void Set_System(void)
   /* Configure the used GPIOs*/
   GPIO_Configuration();
   USB_Cable_Config(DISABLE);
-  Delay(100000);
+  Delay_ms(10);
   USB_Cable_Config(ENABLE);
   
 #if defined(USB_USE_EXTERNAL_PULLUP)

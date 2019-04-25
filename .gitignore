@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 *.uvgui.*
+JLinkSettings.ini
 
 # Object files
 *.o
