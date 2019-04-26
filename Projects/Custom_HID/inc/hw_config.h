@@ -38,8 +38,9 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
-#define SUPPORT_DFU          1 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
-#define USE_BKP_SAVE_FLAG    1
+#define SUPPORT_DFU                  1 //0: flash start addr set to 0x8004000, 1: flash start addr set to 0x8004000
+#define USE_BKP_SAVE_FLAG            1
+//#define USE_SYSTICK_NVIC_DELAY     
 
 #if (USE_BKP_SAVE_FLAG == 1)
   #define IAP_FLAG_ADDR    BKP_DR1
@@ -56,8 +57,7 @@ void EXTI_Configuration(void);
 void ADC_Configuration(void);
 void ADC30x_Configuration(void);
 void Get_SerialNum(void);
-void TimingDelay_Decrement(void);
-void Delay(__IO uint32_t nCount);
+void Delay_ms(uint16_t nms);
 
 #endif  /*__HW_CONFIG_H*/
 

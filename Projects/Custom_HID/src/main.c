@@ -41,8 +41,8 @@
 __IO uint8_t PrevXferComplete = 1;
 __IO uint32_t TimingDelay = 0;
 /* Private function prototypes -----------------------------------------------*/
-void Delay(__IO uint32_t nCount);
-
+void SysTick_Init(void);
+void Delay_ms(uint16_t nms);
 /* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
 * Function Name  : main.
@@ -62,14 +62,15 @@ int main(void)
 #endif
 #endif    
     
+  SysTick_Init();
   Set_System();
     
   while(thisCnt--)
   {
       STM_EVAL_LEDOn(LED1);
-      Delay(500000);
+      Delay_ms(50);
       STM_EVAL_LEDOff(LED1);
-      Delay(500000);
+      Delay_ms(50);
   }
 
   USB_Interrupts_Config();
@@ -81,18 +82,84 @@ int main(void)
   }
 }
 
+#ifndef USE_SYSTICK_NVIC_DELAY
+uint8_t  fac_us=0;
+uint16_t fac_ms=0;
+#endif
+
 /*******************************************************************************
-* Function Name  : Delay
-* Description    : Inserts a delay time.
-* Input          : nCount: specifies the delay time length.
+* Function Name  : SysTick_Init
+* Description    : .
+* Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void Delay(__IO uint32_t nCount)
+void SysTick_Init(void)
 {
-  TimingDelay = nCount;
-  for(; nCount!= 0;nCount--);
+#ifdef USE_SYSTICK_NVIC_DELAY
+    SysTick_Config(9000); //cale = 9000 * (1/9000000) = 1ms
+    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //Freq = 72/8 = 9MHz
+    SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk; //turn-off SysTick
+#else
+	fac_us=9;//Freq = 72/8 = 9MHz
+	fac_ms=(u16)fac_us*1000;
+    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8); //Freq = 72/8 = 9MHz
+#endif
+}			    
+
+/*******************************************************************************
+* Function Name  : Delay_ms
+* Description    : Inserts a delay time.
+* Input          : nms: specifies the delay time length. nms<=1864 
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void Delay_ms(uint16_t nms)
+{
+#ifdef USE_SYSTICK_NVIC_DELAY 
+    TimingDelay = nms;
+    SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;  //turn-on SysTick
+    while(TimingDelay);
+    SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk; //turn-off SysTick
+#else    
+	u32 temp;		   
+	SysTick->LOAD=(u32)nms*fac_ms;//load timer value 	
+	SysTick->VAL =0x00;           //clear counter
+	SysTick->CTRL=0x01 ;          //start counter 
+	do
+	{
+		temp=SysTick->CTRL;
+	}
+	while(temp&0x01&&!(temp&(1<<16)));//wait timer arrive   
+	SysTick->CTRL=0x00;       //close counter
+	SysTick->VAL =0X00;       //clear counter	  	    
+#endif    
+}   
+
+/*******************************************************************************
+* Function Name  : Delay_us
+* Description    : Inserts a delay time.
+* Input          : nCount: specifies the delay time length. uint is us.
+* Output         : None
+* Return         : None
+*******************************************************************************/	
+
+#ifndef USE_SYSTICK_NVIC_DELAY
+void Delay_us(__IO uint32_t nus)
+{		
+	uint32_t temp;	    	 
+	SysTick->LOAD=nus*fac_us; //load timer value 		 
+	SysTick->VAL=0x00;        //clear counter
+	SysTick->CTRL=0x01 ;      //start counter
+	do
+	{
+		temp=SysTick->CTRL;
+	}
+	while(temp&0x01&&!(temp&(1<<16)));//wait timer arrive 
+	SysTick->CTRL=0x00;       //close counter
+	SysTick->VAL =0X00;       //clear counter
 }
+#endif
 
 #ifdef  USE_FULL_ASSERT
 /*******************************************************************************
