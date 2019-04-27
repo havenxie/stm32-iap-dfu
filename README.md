@@ -1,14 +1,23 @@
-﻿# stm32-iap-dfu
-STM32的USB DFU升级，包括BOOT部分的Device_Firmware_Upgrade和App部分的Custom_HID。
+﻿# STM32F103Cx-IAP-DFU
+STM32F103Cx的USB DFU升级包括BOOT部分App部分：
+- BOOT: Device_Firmware_Upgrade
+- App ：
+    - Custom_HID
+	- Custom_HID_VCP
 
 最新进展：
+1. 以上3个固件适配X-LINK-A_V2.0硬件
+2. 更改App的起始地址和中断向量使之支持DFU
+3. 更改App的HID报告描述符使之支持PC端软件USB HID Demonstrator(v1.0.2).exe (该软件可从ST官网下载，也可以向我索要)
+4. 修改DfuSeDemo.exe使之支持HID Detach    
+5. 更改App的HID报告描述符使之支持HID Detach(通过PC端软件DfuSeDemo发命令使CPU从App区跳转到BOOT区) ----at 20190327
+6. 新增复合设备工程Custom_HID_VCP
+7. Custom_HID_VCP具有Custom_HID的所有功能并且具有USB虚拟串口的功能 ---- at 20190427
 
-1. 报告描述符调试完成。
-2. 支持DfuSeDemo.exe和USB HID Demonstrator(v1.0.2).exe。（这两个上位机exe可以在ST官网上下载，也可以像我索要）
-3. BOOT和App协同应用可支持 HID detach（通过点击DfuSeDemo_A.exe的“Enter DFU mode”按钮使设备从App区域跳转到DFU模式）
-	---- by HavenXie @20190327
-4. 修改DfuSeDemo.exe源码使之具有DfuSeDemo_A.exe功能
-
-next：Virtual_COM_Port支持DFU
-
-
+Next Todo：
+ - 大容量存储设备支持DFU
+ - DfuSeDemo解决“Unknow HID Device”的BUG。
+ - DfuSeDemo的command添加更多命令
+ - 熟悉DFU流程
+ - DFU过程校本化
+ - DFU过程采用AES对称加密
