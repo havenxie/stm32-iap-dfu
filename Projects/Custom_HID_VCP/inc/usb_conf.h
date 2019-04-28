@@ -51,28 +51,60 @@
 /* buffer table base address */
 #define BTABLE_ADDRESS      (0x00)
 
-/* EP0  */
-/* rx/tx buffer base address */
-#define ENDP0_RXADDR        (0x40)
-#define ENDP0_TXADDR        (0x80)
+///* EP0  */
+///* rx/tx buffer base address */
+//#define ENDP0_RXADDR        (0x40)
+//#define ENDP0_TXADDR        (0x80)
 
-/* EP1  */
-/* tx/tx buffer base address */
-#define ENDP1_RXADDR        (0xC0)
-#define ENDP1_TXADDR        (0x100)
+///* EP1  */
+///* tx/tx buffer base address */
+//#define ENDP1_RXADDR        (0xC0)
+//#define ENDP1_TXADDR        (0xC4)
 
-/* EP2  */
-/* tx buffer base address */
-#define ENDP2_TXADDR        (0x150)
+///* EP2  */
+///* tx buffer base address */
+//#define ENDP2_TXADDR        (0xC8)
 
-/* EP3  */
-/* rx buffer base address */
-#define ENDP3_RXADDR        (0x160)
+///* EP3  */
+///* rx buffer base address */
+//#define ENDP3_RXADDR        (0xD8)
 
-/* EP4  */
-/* tx buffer base address */
-#define ENDP4_TXADDR        (0x1A0)
-
+///* EP4  */
+///* tx buffer base address */
+//#define ENDP4_TXADDR        (0x118)
+#define BASEADDR_DATA (BTABLE_ADDRESS + 0x00000040)
+// ENP0
+#define ENDP0_PACKETSIZE 0x40
+#define ENDP0_RXADDR  BASEADDR_DATA
+#define ENDP0_TXADDR (ENDP0_RXADDR + ENDP0_PACKETSIZE)
+// ENP1
+#define ENDP1_PACKETSIZE 0x02
+#define ENDP1_RXADDR (ENDP0_TXADDR + ENDP0_PACKETSIZE)
+#define ENDP1_TXADDR (ENDP1_RXADDR + ENDP1_PACKETSIZE)
+// ENP2
+#define ENDP2_PACKETSIZE 0x08
+#define ENDP2_RXADDR (ENDP1_TXADDR + ENDP1_PACKETSIZE)
+#define ENDP2_TXADDR (ENDP2_RXADDR + ENDP2_PACKETSIZE)
+// ENP3
+#define ENDP3_PACKETSIZE 0x40
+#define ENDP3_RXADDR (ENDP2_TXADDR + ENDP2_PACKETSIZE)
+#define ENDP3_TXADDR (ENDP3_RXADDR + ENDP3_PACKETSIZE)
+// ENP4
+#define ENDP4_PACKETSIZE 0x40
+#define ENDP4_RXADDR (ENDP3_TXADDR + ENDP3_PACKETSIZE)
+#define ENDP4_TXADDR (ENDP4_RXADDR + ENDP4_PACKETSIZE)
+// ENP5
+#define ENDP5_PACKETSIZE 0x40
+#define ENDP5_RXADDR (ENDP4_TXADDR + ENDP4_PACKETSIZE)
+#define ENDP5_TXADDR (ENDP5_RXADDR + ENDP5_PACKETSIZE)
+// ENP6
+#define ENDP6_PACKETSIZE 0x40
+#define ENDP6_RXADDR (ENDP5_TXADDR + ENDP5_PACKETSIZE)
+#define ENDP6_TXADDR (ENDP6_RXADDR + ENDP6_PACKETSIZE)
+// ENP7
+#define ENDP7_PACKETSIZE 0x40
+#define ENDP7_RXADDR (ENDP6_TXADDR + ENDP6_PACKETSIZE)
+#define ENDP7_TXADDR (ENDP7_RXADDR + ENDP7_PACKETSIZE)
 /*-------------------------------------------------------------*/
 /* -------------------   ISTR events  -------------------------*/
 /*-------------------------------------------------------------*/

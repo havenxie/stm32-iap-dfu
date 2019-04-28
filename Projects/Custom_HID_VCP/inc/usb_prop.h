@@ -90,10 +90,8 @@ RESULT CustomHID_VCP_Get_Interface_Setting(uint8_t Interface, uint8_t AlternateS
 uint8_t *CustomHID_VCP_GetDeviceDescriptor(uint16_t );
 uint8_t *CustomHID_VCP_GetConfigDescriptor(uint16_t);
 uint8_t *CustomHID_VCP_GetStringDescriptor(uint16_t);
-
 uint8_t *CustomHID_VCP_GetLineCoding(uint16_t Length);
 uint8_t *CustomHID_VCP_SetLineCoding(uint16_t Length);
-
 uint8_t *CustomHID_VCP_GetReportDescriptor(uint16_t Length);
 uint8_t *CustomHID_VCP_GetHIDDescriptor(uint16_t Length);
 uint8_t *CustomHID_VCP_GetProtocolValue(uint16_t Length);

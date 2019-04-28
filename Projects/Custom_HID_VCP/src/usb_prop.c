@@ -286,7 +286,6 @@ void CustomHID_VCP_Status_In(void)
      NVIC_SystemReset();
   }  
   
-  
   Led_State = (Report_Buf[1] ==  Bit_SET) ? Bit_SET : Bit_RESET;
   switch (Report_Buf[0])  
   {
@@ -310,6 +309,7 @@ void CustomHID_VCP_Status_In(void)
       STM_EVAL_LEDOff(LED4); 
       break;
   }
+  
 }
 
 /*******************************************************************************

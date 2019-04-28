@@ -36,7 +36,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-
+#define Receive_Buffer Report_Buf //Open this define to resolve the impact of opening the serial port on the LEDstate of the BUG.
 /* Interval between sending IN packets in frame number (1 frame = 1ms) */
 #define VCOMPORT_IN_FRAME_INTERVAL             5
 
@@ -47,8 +47,11 @@ extern  uint8_t USART_Rx_Buffer[];
 extern uint32_t USART_Rx_ptr_out;
 extern uint32_t USART_Rx_length;
 extern uint8_t  USB_Tx_State;
+extern uint8_t Report_Buf[2];
 
+#ifndef Receive_Buffer
 uint8_t Receive_Buffer[2];
+#endif
 extern __IO uint8_t PrevXferComplete;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
