@@ -52,8 +52,6 @@ void Delay_ms(uint16_t nms);
 ********************************************************************************/
 int main(void)
 {
-  uint8_t thisCnt = 5; 
-
 #if (SUPPORT_DFU == 1)
   NVIC_SetVectorTable(FLASH_BASE, 0x4000);
 #if (USE_BKP_SAVE_FLAG == 1)
@@ -63,18 +61,16 @@ int main(void)
     
   SysTick_Init();
   Set_System();
-	
-  while(thisCnt--)
+  Set_USBClock();
+  USB_Interrupts_Config();
+  USB_Init();
+  while (bDeviceState != CONFIGURED)
   {
       STM_EVAL_LEDOn(LED1);
       Delay_ms(50);
       STM_EVAL_LEDOff(LED1);
       Delay_ms(50);
   }
-  
-  USB_Interrupts_Config();
-  Set_USBClock();
-  USB_Init();
 
   while (1)
   {

@@ -97,8 +97,9 @@ void Set_System(void)
   /* Configure the used GPIOs*/
   GPIO_Configuration();
   USB_Cable_Config(DISABLE);
-  Delay_ms(10);
+  Delay_ms(20);
   USB_Cable_Config(ENABLE);
+  Delay_ms(200);
   
 #if defined(USB_USE_EXTERNAL_PULLUP)
   /* Enable the USB disconnect GPIO clock */
