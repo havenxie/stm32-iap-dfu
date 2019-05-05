@@ -130,7 +130,7 @@ void Set_System(void)
   EXTI_Init(&EXTI_InitStructure);
   
   /* MAL configuration */
-  MAL_Config();
+  //MAL_Config();
 }
 
 /*******************************************************************************
@@ -412,7 +412,7 @@ static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len)
 *******************************************************************************/
 void MAL_Config(void)
 {
-  MAL_Init(0);
+    MAL_Init(0);
 
 #if defined(STM32F10X_HD) || defined(STM32F10X_XL)
   /* Enable the FSMC Clock */

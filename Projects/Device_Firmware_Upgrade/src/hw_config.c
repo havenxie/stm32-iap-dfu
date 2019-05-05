@@ -332,7 +332,7 @@ void USB_Interrupts_Config(void)
 *******************************************************************************/
 void Reset_Device(void)
 {
-  USB_Cable_Config(DISABLE);
+  __set_FAULTMASK(1); 
   NVIC_SystemReset();
 }
 

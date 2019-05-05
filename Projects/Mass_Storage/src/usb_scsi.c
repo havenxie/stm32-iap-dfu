@@ -79,7 +79,7 @@ void SCSI_Inquiry_Cmd(uint8_t lun)
     {
       Inquiry_Data = Standard_Inquiry_Data;
     }
-    else
+    else if( lun == 1)
     {
       Inquiry_Data = Standard_Inquiry_Data2;
     }
@@ -138,7 +138,7 @@ void SCSI_ReadCapacity10_Cmd(uint8_t lun)
   ReadCapacity10_Data[0] = (uint8_t)((Mass_Block_Count[lun] - 1) >> 24);
   ReadCapacity10_Data[1] = (uint8_t)((Mass_Block_Count[lun] - 1) >> 16);
   ReadCapacity10_Data[2] = (uint8_t)((Mass_Block_Count[lun] - 1) >>  8);
-  ReadCapacity10_Data[3] = (uint8_t)(Mass_Block_Count[lun] - 1);
+  ReadCapacity10_Data[3] = (uint8_t)((Mass_Block_Count[lun] - 1));
 
   ReadCapacity10_Data[4] = (uint8_t)(Mass_Block_Size[lun] >>  24);
   ReadCapacity10_Data[5] = (uint8_t)(Mass_Block_Size[lun] >>  16);

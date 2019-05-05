@@ -69,7 +69,7 @@ const uint8_t MASS_ConfigDescriptor[MASS_SIZ_CONFIG_DESC] =
     /*      Index of string descriptor */
     /*      describing the configuration */
     0xC0,   /* bmAttributes: */
-    /*      Self powered */
+    /*      BUS powered */
     0x32,   /* MaxPower 100 mA */
 
     /******************** Descriptor of Mass Storage interface ********************/
@@ -134,7 +134,7 @@ uint8_t MASS_StringSerial[MASS_SIZ_STRING_SERIAL] =
     MASS_SIZ_STRING_SERIAL,
     0x03,
     /* Serial number*/
-    'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0
+    'S', 0, 'T', 0, 'M', 0, '3', 0, '2', 0, '1', 0, '0', 0
   };
 const uint8_t MASS_StringInterface[MASS_SIZ_STRING_INTERFACE] =
   {
