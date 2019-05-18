@@ -86,8 +86,6 @@ void Set_System(void)
   GPIO_Configuration();
   USB_Cable_Config(DISABLE);
   Delay_ms(20);
-  USB_Cable_Config(ENABLE);
-  Delay_ms(200);
   
 #if defined(STM32F37X) || defined(STM32F30X)
   

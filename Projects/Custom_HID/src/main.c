@@ -63,7 +63,6 @@ int main(void)
   SysTick_Init();
   Set_System();
   Set_USBClock();
-  USB_Interrupts_Config();
   USB_Init();
   while (bDeviceState != CONFIGURED)
   {
@@ -72,7 +71,6 @@ int main(void)
       STM_EVAL_LEDOff(LED1);
       Delay_ms(50);
   }
-
   while (1)
   {
   }

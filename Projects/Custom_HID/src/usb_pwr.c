@@ -67,6 +67,7 @@ RESULT PowerOn(void)
 
   /*** cable plugged-in ? ***/
   USB_Cable_Config(ENABLE);
+  Delay_ms(200);
 
   /*** CNTR_PWDN = 0 ***/
   wRegVal = CNTR_FRES;
@@ -78,7 +79,8 @@ RESULT PowerOn(void)
   /*** Clear pending interrupts ***/
   _SetISTR(0);
   /*** Set interrupt mask ***/
-  wInterrupt_Mask = CNTR_RESETM | CNTR_SUSPM | CNTR_WKUPM;
+//  wInterrupt_Mask = CNTR_RESETM | CNTR_SUSPM | CNTR_WKUPM;
+    wInterrupt_Mask = CNTR_RESETM ;
   _SetCNTR(wInterrupt_Mask);
   
   return USB_SUCCESS;

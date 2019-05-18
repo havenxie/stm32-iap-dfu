@@ -130,7 +130,7 @@ void Set_System(void)
   
   /* Init the media interface */
   MAL_Init();
-  USB_Cable_Config(ENABLE);
+  //USB_Cable_Config(ENABLE);
   
   /* Configure the EXTI line 18 connected internally to the USB IP */
   EXTI_ClearITPendingBit(EXTI_Line18);
@@ -333,6 +333,7 @@ void USB_Interrupts_Config(void)
 void Reset_Device(void)
 {
   __set_FAULTMASK(1); 
+  USB_Cable_Config(DISABLE);
   NVIC_SystemReset();
 }
 

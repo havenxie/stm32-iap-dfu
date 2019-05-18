@@ -157,6 +157,9 @@ void CustomHID_VCP_init(void)
   /* configure the USART to the default settings */
   USART_Config_Default();
 
+  /* Enable USB interrupts */
+  USB_Interrupts_Config();
+    
   bDeviceState = UNCONNECTED;
 }
 
@@ -283,6 +286,7 @@ void CustomHID_VCP_Status_In(void)
     PWR->CR &= ~PWR_CR_DBP;
 #endif
      __set_FAULTMASK(1); 
+     USB_Cable_Config(DISABLE);
      NVIC_SystemReset();
   }  
   

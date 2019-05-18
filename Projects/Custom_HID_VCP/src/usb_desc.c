@@ -51,7 +51,7 @@ const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_VCP_SIZ_DEVICE_DESC] =
     0x40,   /* bMaxPacketSize0 */
     0x83,
     0x04,   /* idVendor = 0x0483 */
-    0x51,
+    0x40,
     0x57,   /* idProduct = 0x5751 */
     0x00,
     0x02,   /* bcdDevice = 2.00 */

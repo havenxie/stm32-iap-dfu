@@ -61,8 +61,7 @@ int main(void)
     
   SysTick_Init();
   Set_System();
-  Set_USBClock();
-  USB_Interrupts_Config();
+  Set_USBClock();  
   USB_Init();
   while (bDeviceState != CONFIGURED)
   {

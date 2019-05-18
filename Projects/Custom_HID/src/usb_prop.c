@@ -146,7 +146,9 @@ void CustomHID_init(void)
   /* Perform basic device initialization operations */
   USB_SIL_Init();
     
-
+  /* Enable USB interrupts */
+  USB_Interrupts_Config();
+    
   bDeviceState = UNCONNECTED;
 }
 
