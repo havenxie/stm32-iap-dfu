@@ -242,10 +242,10 @@ void CustomHID_SetDeviceAddress (void)
 void CustomHID_Status_In(void)
 {  
   BitAction Led_State;
-  
   if(Report_Buf[0] == 0x80 && Report_Buf[1] == 0x55)
   {
 #if (USE_BKP_SAVE_FLAG == 1)
+		
     PWR->CR |= PWR_CR_DBP;
     BKP_WriteBackupRegister(IAP_FLAG_ADDR, 0x5A5A);
     PWR->CR &= ~PWR_CR_DBP;

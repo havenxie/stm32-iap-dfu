@@ -180,7 +180,6 @@ FlagStatus BKP_GetFlagStatus(void);
 void BKP_ClearFlag(void);
 ITStatus BKP_GetITStatus(void);
 void BKP_ClearITPendingBit(void);
-
 #ifdef __cplusplus
 }
 #endif

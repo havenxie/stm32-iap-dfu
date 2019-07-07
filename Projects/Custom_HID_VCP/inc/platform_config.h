@@ -117,7 +117,16 @@
   #define RCC_APB2Periph_GPIO_DISCONNECT      RCC_APB2Periph_GPIOB
   #define EVAL_COM1_IRQHandler                USART1_IRQHandler 
  
+  #define GPIO_IOAIN                          GPIOB
+  #define GPIO_IOAIN_PIN                      GPIO_Pin_0   /* PC.04 */
+  #define ADC_AIN_CHANNEL                     ADC_Channel_8
+  #define RCC_APB2Periph_GPIO_IOAIN           RCC_APB2Periph_GPIOB
 
+  #define ADC1_DR_Address                     ((uint32_t)0x4001244C)
+ 
+  #define EVAL_COM1_IRQHandler                USART1_IRQHandler 
+  #define EVAL_COM2_IRQHandler                USART2_IRQHandler 
+	
 #elif defined (USE_STM32L152_EVAL) || defined (USE_STM32L152D_EVAL)
  /* 
    For STM32L15xx devices it is possible to use the internal USB pullup

@@ -13,6 +13,7 @@ STM32F103Cx的USB DFU升级包括BOOT部分App部分：
 5. 更改App的HID报告描述符使之支持HID Detach(通过PC端软件DfuSeDemo发命令使CPU从App区跳转到BOOT区) ----at 20190327
 6. 新增复合设备工程Custom_HID_VCP
 7. Custom_HID_VCP具有Custom_HID的所有功能并且具有USB虚拟串口的功能 ---- at 20190427
+8. 所有工程的xxB项目在Keil5.26版本重新编译并且编译器换成版本6，xxE项目在IAR重新编译。  ----at 20190707
 
 Next Todo：
  - 大容量存储设备支持DFU
