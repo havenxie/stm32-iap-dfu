@@ -1,9 +1,9 @@
 ﻿# STM32F103Cx-IAP-DFU
 STM32F103Cx的USB DFU升级包括BOOT部分App部分：
-- BOOT: Device_Firmware_Upgrade
+- BOOT: Device_Firmware_Upgrade （0483 DF11）
 - App ：
-    - Custom_HID
-	- Custom_HID_VCP
+    - Custom_HID  (0483 5750)
+    - Custom_HID_VCP (0483 5751)
 
 最新进展：
 1. 以上3个固件适配X-LINK-A_V2.0硬件

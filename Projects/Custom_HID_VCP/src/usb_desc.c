@@ -51,7 +51,7 @@ const uint8_t CustomHID_VCP_DeviceDescriptor[CUSTOMHID_VCP_SIZ_DEVICE_DESC] =
     0x40,   /* bMaxPacketSize0 */
     0x83,
     0x04,   /* idVendor = 0x0483 */
-    0x40,
+    0x51,
     0x57,   /* idProduct = 0x5751 */
     0x00,
     0x02,   /* bcdDevice = 2.00 */
@@ -76,18 +76,18 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[CUSTOMHID_VCP_SIZ_CONFIG_DESC] =
     0x32,   /* MaxPower 100 mA */
 	  
     /* Interface Association Descriptor(IAD Descriptor)  */ 
-	/* 9 */
-	0x08,   /*   bLength  */
-	0x0B,   /*   bDescriptorType*/
-	0x00,   /*    bFirstInterface*/
-	0x02,   /*     bInterfaceCount*/
-	0x02,   /*     bFunctionClass --CDC*/
-	0x02,   /*     bFunctionSubClass*/
-	0x01,   /*    bFunctionProtocoll*/
-	0x00,   /*   iFunction */
+    /* 9 */
+    0x08,   /*   bLength  */
+    0x0B,   /*   bDescriptorType*/
+    0x00,   /*    bFirstInterface*/
+    0x02,   /*     bInterfaceCount*/
+    0x02,   /*     bFunctionClass --CDC*/
+    0x02,   /*     bFunctionSubClass*/
+    0x01,   /*    bFunctionProtocoll*/
+    0x00,   /*   iFunction */
 
     /*Interface Descriptor*/
-	/* 17 */
+  	/* 17 */
     0x09,   /* bLength: Interface Descriptor size */
     USB_INTERFACE_DESCRIPTOR_TYPE,  /* bDescriptorType: Interface */
     /* Interface descriptor type */
@@ -186,7 +186,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[CUSTOMHID_VCP_SIZ_CONFIG_DESC] =
     0x03,         /* bInterfaceClass: HID */
     0x00,         /* bInterfaceSubClass : 1=BOOT, 0=no boot */
     0x00,         /* nInterfaceProtocol : 0=none, 1=keyboard, 2=mouse */
-    0,            /* iInterface: Index of string descriptor */
+    0x00,            /* iInterface: Index of string descriptor */
     /******************** Descriptor of Custom HID HID ********************/
     /* 92 */
     0x09,         /* bLength: HID Descriptor size */
@@ -246,13 +246,13 @@ const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_VCP_SIZ_REPORT_DESC] =
     0x09, 0x01,            /* USAGE (Demo Kit)               */  //3 local   
     0xa1, 0x01,            /* COLLECTION (Application)       */  //1 main
        
-	0x85, 0x80, /* REPORT_ID (128) */ 
-	0x09, 0x55, /*USAGE (LED 1)  */
-	0x15, 0x00, /* LOGICAL_MINIMUM (0) */
-	0x26, 0xFF, 0x00, /* LOGICAL_MAXIMUM (255) */
-	0x75, 0x08, /* REPORT_SIZE (8 bits) */
-	0x95, 0x01, /* REPORT_COUNT (1) */
-	0xB1, 0x82, /* FEATURE (Data,Var,Abs,Vol */    
+    0x85, 0x80, /* REPORT_ID (128) */ 
+    0x09, 0x55, /*USAGE (LED 1)  */
+    0x15, 0x00, /* LOGICAL_MINIMUM (0) */
+    0x26, 0xFF, 0x00, /* LOGICAL_MAXIMUM (255) */
+    0x75, 0x08, /* REPORT_SIZE (8 bits) */
+    0x95, 0x01, /* REPORT_COUNT (1) */
+    0xB1, 0x82, /* FEATURE (Data,Var,Abs,Vol */    
     /* 6 */
     
     /* Led 1 */        
@@ -319,7 +319,7 @@ const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_VCP_SIZ_REPORT_DESC] =
     0x75, 0x08,            /*     REPORT_SIZE (8)            */  //2 global
     0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */  //1 main
     
-	0x85, 0x05,            /*     REPORT_ID (5)              */  //2 global   
+  	0x85, 0x05,            /*     REPORT_ID (5)              */  //2 global   
     0x09, 0x05,            /*     USAGE (Push Button)        */  //3 local                   
     0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  //1 main
                           
@@ -328,14 +328,14 @@ const uint8_t CustomHID_VCP_ReportDescriptor[CUSTOMHID_VCP_SIZ_REPORT_DESC] =
     /* Tamper Push Button */   
     /* 142 */
 	    
-	0x85, 0x06,            /*     REPORT_ID (6)              */
+	  0x85, 0x06,            /*     REPORT_ID (6)              */
     0x09, 0x06,            /*     USAGE (Tamper Push Button) */      
     0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
     0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
     0x75, 0x08,            /*     REPORT_SIZE (8)            */  //
     0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
     
-	0x85, 0x06,            /*     REPORT_ID (6) */
+  	0x85, 0x06,            /*     REPORT_ID (6) */
     0x09, 0x06,            /*     USAGE (Tamper Push Button) */                                 
     0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
     

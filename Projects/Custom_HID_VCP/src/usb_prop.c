@@ -120,7 +120,7 @@ ONE_DESCRIPTOR String_Descriptor[4] =
     {(uint8_t*)CustomHID_VCP_StringLangID, CUSTOMHID_VCP_SIZ_STRING_LANGID},
     {(uint8_t*)CustomHID_VCP_StringVendor, CUSTOMHID_VCP_SIZ_STRING_VENDOR},
     {(uint8_t*)CustomHID_VCP_StringProduct, CUSTOMHID_VCP_SIZ_STRING_PRODUCT},
-    {(uint8_t*)CustomHID_VCP_StringSerial, CUSTOMHID_VCP_SIZ_STRING_SERIAL}
+    {(uint8_t*)CustomHID_VCP_StringSerial, CUSTOMHID_VCP_SIZ_STRING_SERIAL},
   };
 
 /* Extern variables ----------------------------------------------------------*/

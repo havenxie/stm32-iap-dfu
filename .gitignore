@@ -55,6 +55,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .vscode/ipch/
+backup/
 
 # Keil Project
 
