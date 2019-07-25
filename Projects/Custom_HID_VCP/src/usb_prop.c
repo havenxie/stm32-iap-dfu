@@ -417,10 +417,10 @@ RESULT CustomHID_VCP_NoData_Setup(uint8_t RequestNo)
     {
       return USB_SUCCESS;
     }
-	else if(RequestNo == SET_PROTOCOL)
-	{
-		return CustomHID_VCP_SetProtocol();
-	}
+  	else if(RequestNo == SET_PROTOCOL)
+	  {
+	  	return CustomHID_VCP_SetProtocol();
+	  }
   }
 
   return USB_UNSUPPORT;

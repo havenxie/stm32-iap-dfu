@@ -77,7 +77,7 @@ const uint8_t Virtual_Com_Port_ConfigDescriptor[] =
     0x01,   /* bInterfaceProtocol: Common AT commands */
     0x00,   /* iInterface: */
     /*Header Functional Descriptor*/
-    0x05,   /* bLength: Endpoint Descriptor size */
+    0x05,   /* bLength: Functional Descriptor size */
     0x24,   /* bDescriptorType: CS_INTERFACE */
     0x00,   /* bDescriptorSubtype: Header Func Desc */
     0x10,   /* bcdCDC: spec release number */
