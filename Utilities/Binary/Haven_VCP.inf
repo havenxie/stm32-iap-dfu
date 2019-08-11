@@ -1,0 +1,73 @@
+﻿
+;
+; Installs the Virtual COM port interface of ST-Link based composite devices.
+;
+
+[Version]
+Signature = "$Windows NT$"
+Class     = Ports
+ClassGUID = {4D36E978-E325-11CE-BFC1-08002BE10318}
+;驱动程序提供商名称
+Provider  = %COMPANY%
+;使用layout.inf文件
+LayoutFile = layout.inf
+;驱动程序的日期和版本号。驱动程序安装器据此来判断驱动程序的新旧
+;它们会显示在设备属性的驱动程序的标签页中
+DriverVer=08/11/2019,0.0.0.1
+
+;制造商名称
+[Manufacturer]
+%ManufName% = Standard,NTx86,NTamd64
+
+;目标文件夹的位置。12为system21
+[DestinationDirs]
+DefaultDestDir=12
+
+[ManufName]
+;显示设备的名称以及匹配的ID号
+;Modem3是在后面定义的一个字符串，修改它可以显示不同的设备名称
+;后面的USB\VID_8888&PIO_0007表示该驱动所匹配的设备，需要根据自己的设备设置
+%Modem%=Modem,USB\VID_0483&PID_5751
+
+
+;----------------------------------------------------------
+; Windows 2000/XP Sections
+;----------------------------------------------------------
+[Modem.nt]
+CopyFiles=USBModemCopyFileSection
+AddReg=Modem.nt.AddReg
+
+[USBModemCopyFileSection]
+;需要复制usbser.sys文件，该文件是Windows 2000/XP自带的
+usbser.sys,,,0x20
+
+[Modem.nt.AddReg]
+;增加注册表项
+HKR,,DevLoader,,*ntkern
+HKR,,BTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[Modem.nt.Services]
+;增加驱动服务
+AddService=usbser, 0x00000002, DriverService
+
+[DriverService]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+
+; =================== Strings ===================
+
+[Strings]
+;驱动程序提供商名称
+COMPANY="STMicroelectronics"
+;制造商名称
+ManufName="STMicroelectronics"
+;ClassName="Universal Serial Bus devices"
+;设备名称，它将显示在设备管理器中
+Modem="Haven Virtual COM Port"
+;服务名称
+SERVICE="Virtual COM Port"
+REG_MULTI_SZ = 0x00010000
