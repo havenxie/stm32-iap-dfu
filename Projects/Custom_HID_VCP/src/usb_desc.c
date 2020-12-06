@@ -174,7 +174,7 @@ const uint8_t CustomHID_VCP_ConfigDescriptor[CUSTOMHID_VCP_SIZ_CONFIG_DESC] =
     0x03,    //bFunctionClass:HID
     0x00,    //bFunctionSubClass
     0x00,    //bFunctionProtocol
-    0x05,    //iFunction
+    0x02,    //iFunction
 	
     /************** Descriptor of Custom HID interface ****************/
     /* 83 */

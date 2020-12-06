@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "D:\Code\FirmWare\IAP-DFU\1.STM32-IAP(DFU)\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.general.xcl" --backend -f "D:\Code\FirmWare\IAP-DFU\1.STM32-IAP(DFU)\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "D:\Workstation\Embedded\STM\USB-Applications\STM32-USB-Applications\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.general.xcl" --backend -f "D:\Workstation\Embedded\STM\USB-Applications\STM32-USB-Applications\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "D:\Code\FirmWare\IAP-DFU\1.STM32-IAP(DFU)\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.general.xcl" "--debug_file=%~1" --backend -f "D:\Code\FirmWare\IAP-DFU\1.STM32-IAP(DFU)\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.3\common\bin\cspybat" -f "D:\Workstation\Embedded\STM\USB-Applications\STM32-USB-Applications\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.general.xcl" "--debug_file=%~1" --backend -f "D:\Workstation\Embedded\STM\USB-Applications\STM32-USB-Applications\Projects\Custom_HID\EWARM\settings\Custom_HID.STM3210E-EVAL.driver.xcl" 
 
 @echo off 
 :end
