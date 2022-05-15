@@ -148,7 +148,7 @@ const uint8_t CustomHID_ReportDescriptor[CUSTOMHID_SIZ_REPORT_DESC] =
     0x06, 0x00, 0xFF,      /* USAGE_PAGE (Vendor Page: 0xFF00) *///2 global                    
     0x09, 0x01,            /* USAGE (Demo Kit)               */  //3 local   
     0xa1, 0x01,            /* COLLECTION (Application)       */  //1 main
-       
+
 	0x85, 0x80, /* REPORT_ID (128) */ 
 	0x09, 0x55, /*USAGE (LED 1)  */
 	0x15, 0x00, /* LOGICAL_MINIMUM (0) */

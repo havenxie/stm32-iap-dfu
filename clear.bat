@@ -1,4 +1,5 @@
-﻿rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152-EVAL
+﻿
+rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM32L152D-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210B-EVAL
 rd  /s/q  .\Projects\Audio_Speaker\MDK-ARM\STM3210E-EVAL
@@ -114,6 +115,7 @@ rd  /s/q  .\Projects\Custom_HID_VCP\EWARM\STM3210B-EVAL
 rd  /s/q  .\Projects\Custom_HID_VCP\EWARM\STM3210E-EVAL
 rd  /s/q  .\Projects\Custom_HID_VCP\EWARM\STM32303C-EVAL
 rd  /s/q  .\Projects\Custom_HID_VCP\EWARM\STM32373C-EVAL
+
 del *.bak /s
 del *.ddk /s
 del *.edk /s
@@ -154,7 +156,20 @@ del *.htm /s
 ::del *.sct /s
 del *.map /s
 del *.htm /s
-del *.txt /s
+::del *.txt /s
 del Projects/*.bat /s
-::del *.uvgui.* /s
+del *.pbw /s
+del *.ninja /s
+del *.ninja_log /s
+del *.ninja_deps /s
+del *.cspy.bat /s
+del *.wspos /s
+del *.xml /s
+::del *.jlink /s
+del *.haven /s
+del *.saved_uv4 /s
+
+rd /s/q  RTE
+rd /s/q Objects
+rd /s/q Listings
 exit

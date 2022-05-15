@@ -28,6 +28,8 @@ DefaultDestDir=12
 "STMicroelectronics Virtual COM Port"=STMUSB, USB\VID_0483&PID_5751&MI_02
 "STMicroelectronics Virtual COM Port"=STMUSB, USB\VID_0483&PID_5752&MI_00 
 "STMicroelectronics Virtual COM Port"=STMUSB, USB\VID_0483&PID_5752&MI_02
+"STMicroelectronics Virtual COM Port"=STMUSB, USB\VID_0483&PID_3258&MI_00 
+"STMicroelectronics Virtual COM Port"=STMUSB, USB\VID_0483&PID_3258&MI_02
 
 ;------------------------------------------------------------------------------
 ;  Windows 2000/XP Sections

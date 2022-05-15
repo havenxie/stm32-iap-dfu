@@ -1,0 +1,59 @@
+﻿del *.bak /s
+del *.ddk /s
+del *.edk /s
+del *.lst /s
+del *.lnp /s
+del *.mpf /s
+del *.mpj /s
+del *.obj /s
+del *.omf /s
+::del *.opt /s  ::������ɾ��JLINK������
+del *.plg /s
+del *.rpt /s
+del *.tmp /s
+del *.__i /s
+del *._ip /s
+del *._ia /s
+del *.i /s
+del *.crf /s
+del *.o /s
+del *.d /s
+del *.axf /s
+del *.tra /s
+del *.dep /s           
+del *.pbi /s
+del *.xcl /s
+del *.pbd /s
+del *.linf /s
+del *.browse /s
+del *.crun /s
+del *.dbgdt /s
+del *.dnx /s
+del *.ps1 /s
+del *.wsdt /s
+del JLinkLog.txt /s
+
+del *.iex /s
+del *.htm /s
+::del *.sct /s
+del *.map /s
+del *.htm /s
+::del *.txt /s
+del Projects/*.bat /s
+del *.pbw /s
+del *.ninja /s
+del *.ninja_log /s
+del *.ninja_deps /s
+del *.cspy.bat /s
+del *.wspos /s
+del *.xml /s
+::del *.jlink /s
+del *.haven /s
+del *.saved_uv4 /s
+del *.scvd /s
+
+rd /s/q  RTE
+rd /s/q Objects
+rd /s/q Listings
+
+exit

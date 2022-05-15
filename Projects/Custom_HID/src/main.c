@@ -51,6 +51,7 @@ void Delay_ms(uint16_t nms);
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
+
 int main(void)
 {    
 #if (SUPPORT_DFU == 1)
@@ -59,7 +60,6 @@ int main(void)
   RCC_APB1PeriphClockCmd(RCC_APB1ENR_PWREN | RCC_APB1ENR_BKPEN , ENABLE);
 #endif
 #endif    
-    
   SysTick_Init();
   Set_System();
   Set_USBClock();

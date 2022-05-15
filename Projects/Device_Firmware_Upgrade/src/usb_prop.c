@@ -216,7 +216,7 @@ void DFU_SetDeviceAddress (void)
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-void DFU_Status_In(void)
+void DFU_Status_In(void) //端点0的数据输入
 {}
 
 /*******************************************************************************
@@ -226,7 +226,7 @@ void DFU_Status_In(void)
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-void DFU_Status_Out (void)
+void DFU_Status_Out (void)//端点0的数据输出
 {
   DEVICE_INFO *pInfo = &Device_Info;
   uint32_t Addr;
@@ -235,7 +235,7 @@ void DFU_Status_Out (void)
   {
     if (DeviceState == STATE_dfuDNBUSY)
     {
-      if (wBlockNum == 0)   /* Decode the Special Command*/
+      if (wBlockNum == 0)   /* Decode the Special Command*/ //wValue
       {
         if ((MAL_Buffer[0] ==  CMD_GETCOMMANDS) && (wlength == 1))
         {}
